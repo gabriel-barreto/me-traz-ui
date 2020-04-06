@@ -1,7 +1,19 @@
 import axios from 'axios';
 
-import { api as config } from '../config';
+import { api as ApiConfig } from '../config';
+import { useLoader } from '../contexts';
 
-const $http = axios.create(config);
+const { setConfig: setLoader } = useLoader();
+const $http = axios.create(ApiConfig);
+
+$http.interceptors.request.use((config) => {
+  setLoader((prev) => ({ ...prev, visible: true }));
+  return config;
+});
+
+$http.interceptors.response.use((response) => {
+  setLoader((prev) => ({ ...prev, visible: true }));
+  return response;
+});
 
 export default $http;
