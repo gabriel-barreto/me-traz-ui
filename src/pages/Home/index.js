@@ -1,7 +1,9 @@
 import React from 'react';
 
+import { Layout } from '../../components';
+
 function HomePage() {
-  return <section className="page">Home Page</section>;
+  return <Layout>Home Page</Layout>;
 }
 
 export default HomePage;
