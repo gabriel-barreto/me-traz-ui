@@ -1,8 +1,9 @@
-
 import React from 'react';
 import { BrowserRouter } from 'react-router-dom';
 import { addDecorator, configure } from '@storybook/react';
-import styled from 'styled-components';
+import styled, { ThemeProvider } from 'styled-components';
+
+import { GlobalStyle, Theme } from '../src/styles';
 
 const Wrapper = styled.div`
   align-items: center;
@@ -12,15 +13,19 @@ const Wrapper = styled.div`
   width: 100%;
 `;
 
-const withRouter = storyFn => <BrowserRouter>{storyFn()}</BrowserRouter>;
-
-const withGlobalStyle = storyFn => (
+const withRouter = (storyFn) => <BrowserRouter>{storyFn()}</BrowserRouter>;
+const withGlobalStyle = (storyFn) => (
   <Wrapper>
+    <GlobalStyle />
     {storyFn()}
   </Wrapper>
 );
+const withTheme = (storyFn) => (
+  <ThemeProvider theme={Theme}>{storyFn()}</ThemeProvider>
+);
 
 addDecorator(withRouter);
+addDecorator(withTheme);
 addDecorator(withGlobalStyle);
 
 // automatically import all files ending in *.stories.js
