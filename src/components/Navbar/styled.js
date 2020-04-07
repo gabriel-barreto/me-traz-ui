@@ -1,10 +1,16 @@
 import styled from 'styled-components';
 
+import SearchForm from '../SearchForm';
+
 export const NavBrand = styled.img`
   max-height: 100%;
   object-fit: contain;
   object-position: center;
   width: auto;
+`;
+
+export const NavSearchForm = styled(SearchForm)`
+  margin: 0 4rem;
 `;
 
 const navbarBorderRadius = '48px';
