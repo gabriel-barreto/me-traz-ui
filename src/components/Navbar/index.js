@@ -9,6 +9,7 @@ function Navbar() {
     <S.Navbar>
       <S.NavBrand src={brand} tilte="Me Traz" alt="Me Traz" />
       <S.NavSearchForm />
+      <S.NavChatLink href="#">Entrar em Contato</S.NavChatLink>
     </S.Navbar>
   );
 }

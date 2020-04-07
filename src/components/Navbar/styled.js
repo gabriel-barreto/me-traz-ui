@@ -28,3 +28,15 @@ export const Navbar = styled.nav`
   width: 100%;
   z-index: 9;
 `;
+
+export const NavChatLink = styled.a`
+  color: ${({ theme }) => theme.hexColors.primary};
+  font-size: 1.6rem;
+  transition: color 400ms;
+  white-space: nowrap;
+  will-change: color;
+
+  &:hover {
+    color: ${({ theme }) => theme.hexColors.primaryDark};
+  }
+`;
