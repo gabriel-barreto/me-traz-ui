@@ -9,6 +9,7 @@
     "@types/prop-types": "^15.7.3",
     "axios": "^0.19.2",
     "chroma-js": "^2.1.0",
+    "lodash.orderby": "^4.6.0",
     "miragejs": "^0.1.36",
     "prop-types": "^15.7.2",
     "react": "^16.13.1",
