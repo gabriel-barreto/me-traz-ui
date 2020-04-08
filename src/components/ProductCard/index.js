@@ -40,15 +40,15 @@ function ProductCard({ currency, description, photo, price, title }) {
   );
 }
 
-ProductCard.defaultProps = { currency: 'R$', photo: { url: '' } };
-ProductCard.propTypes = {
+export const Type = {
   currency: PropTypes.string,
   description: PropTypes.string.isRequired,
-  photo: PropTypes.shape({
-    url: PropTypes.string.isRequired,
-  }),
-  price: PropTypes.number.isRequired,
+  photo: PropTypes.shape({ url: PropTypes.string }),
+  price: PropTypes.oneOfType([PropTypes.number, PropTypes.string]).isRequired,
   title: PropTypes.string.isRequired,
 };
+
+ProductCard.defaultProps = { currency: 'R$', photo: { url: '' } };
+ProductCard.propTypes = Type;
 
 export default ProductCard;
