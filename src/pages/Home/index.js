@@ -1,9 +1,27 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 
-import { Layout } from '../../components';
+import { $product } from '../../services';
+
+import { Layout, ProductsGroup } from '../../components';
 
 function HomePage() {
-  return <Layout>Home Page</Layout>;
+  const [products, setProducts] = useState([]);
+  useEffect(() => {
+    $product
+      .fetchAll()
+      .then((response) => setProducts(response))
+      .catch((err) => {
+        // TODO: show a message to user
+        console.log('fetch error');
+        console.log(err);
+      });
+  }, []);
+
+  return (
+    <Layout>
+      <ProductsGroup title="Todos" products={products} />
+    </Layout>
+  );
 }
 
 export default HomePage;
