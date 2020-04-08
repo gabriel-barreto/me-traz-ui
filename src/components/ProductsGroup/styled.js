@@ -46,7 +46,7 @@ export const ProductsGroupBody = styled.div`
   @media screen and (min-width: ${breakpoint('sm')}) {
     grid-template-columns: repeat(2, 1fr);
   }
-  @media screen and (min-width: ${breakpoint('lg')}) {
+  @media screen and (min-width: ${breakpoint('md')}) {
     grid-template-columns: repeat(3, 1fr);
   }
   @media screen and (min-width: ${breakpoint('xl')}) {
