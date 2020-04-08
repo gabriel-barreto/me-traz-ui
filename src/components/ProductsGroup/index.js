@@ -41,7 +41,7 @@ function ProductsGroup({ title, products }) {
     }
 
     setState((prev) => ({ ...prev, list: uList }));
-  }, [state.filter, state.order]);
+  }, [state.filter, state.order, products]);
 
   const { filter, list, order } = state;
   return (
