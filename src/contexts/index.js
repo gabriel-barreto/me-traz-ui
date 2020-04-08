@@ -9,4 +9,4 @@ export default function AppContextProvider({ children }) {
 AppContextProvider.propTypes = { children: PropTypes.node.isRequired };
 
 // ==> Context Hooks
-export { useLoader } from './loader.context';
+export { useLoader, setLoader } from './loader.context';
