@@ -5,3 +5,7 @@ export const BaseLayout = styled.main`
   height: 100%;
   min-height: 100vh;
 `;
+
+export const BaseLayoutBody = styled.div`
+  padding: 12.4rem 3.2rem 3.2rem 3.2rem;
+`;

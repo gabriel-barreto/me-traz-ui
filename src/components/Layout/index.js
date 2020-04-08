@@ -10,7 +10,7 @@ function Layout({ children }) {
   return (
     <S.BaseLayout>
       <Navbar />
-      {children}
+      <S.BaseLayoutBody>{children}</S.BaseLayoutBody>
       <Loader />
     </S.BaseLayout>
   );
