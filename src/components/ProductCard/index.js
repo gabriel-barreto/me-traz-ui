@@ -18,7 +18,9 @@ function ProductCard({ currency, description, photo, price, title }) {
         </S.ProductCardDescription>
         <S.ProductCardPrice>
           <S.ProductCardCurrency>{currency}</S.ProductCardCurrency>
-          <S.ProductCardValue>{price.replace('.', ',')}</S.ProductCardValue>
+          <S.ProductCardValue>
+            {`${price}`.replace('.', ',')}
+          </S.ProductCardValue>
         </S.ProductCardPrice>
       </S.ProductCardBody>
       <S.ProductCardAddToCardButton>
