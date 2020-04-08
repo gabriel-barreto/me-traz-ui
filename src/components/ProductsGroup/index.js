@@ -47,7 +47,12 @@ function ProductsGroup({ title, products }) {
   return (
     <S.ProductsGroup>
       <S.ProductsGroupHeader>
-        <S.ProductsGroupTitle>{title}</S.ProductsGroupTitle>
+        <S.ProductGroupTitleContainer>
+          <S.ProductsGroupTitle>{title}</S.ProductsGroupTitle>
+          <S.ProductsGroupCount>
+            Exibindo {list.length} items
+          </S.ProductsGroupCount>
+        </S.ProductGroupTitleContainer>
         <S.ProductsGroupForms>
           <FilterByForm
             currentValue={filter}

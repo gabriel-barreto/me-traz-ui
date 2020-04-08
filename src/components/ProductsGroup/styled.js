@@ -10,6 +10,16 @@ export const ProductsGroupTitle = styled.h2`
   text-transform: uppercase;
 `;
 
+export const ProductsGroupCount = styled.p`
+  color: ${({ theme }) => theme.chromaColors.lightest.alpha(0.88)};
+  font-size: 1.2rem;
+  font-weight: 300;
+`;
+
+export const ProductGroupTitleContainer = styled.div`
+  width: 100%;
+`;
+
 export const ProductsGroupForms = styled.div`
   align-items: center;
   display: flex;
