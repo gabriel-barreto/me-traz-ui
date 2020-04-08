@@ -10,6 +10,16 @@ export const ProductsGroupTitle = styled.h2`
   text-transform: uppercase;
 `;
 
+export const ProductsGroupForms = styled.div`
+  align-items: center;
+  display: flex;
+  justify-content: flex-end;
+
+  > div:not(:last-of-type) {
+    margin: 0 1.6rem 0 0;
+  }
+`;
+
 export const ProductsGroupHeader = styled.div`
   align-items: center;
   display: flex;
@@ -34,4 +44,6 @@ export const ProductsGroupBody = styled.div`
   }
 `;
 
-export const ProductsGroup = styled.section``;
+export const ProductsGroup = styled.section`
+  width: 100%;
+`;
