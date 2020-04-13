@@ -14,6 +14,10 @@ export const ProductsGroupCount = styled.p`
   color: ${({ theme }) => theme.chromaColors.lightest.alpha(0.88)};
   font-size: 1.2rem;
   font-weight: 300;
+
+  @media screen and (max-width: ${breakpoint('md')}) {
+    margin: 0.16rem 0 0 0;
+  }
 `;
 
 export const ProductGroupTitleContainer = styled.div`
@@ -28,13 +32,27 @@ export const ProductsGroupForms = styled.div`
   > div:not(:last-of-type) {
     margin: 0 1.6rem 0 0;
   }
+
+  @media screen and (max-width: 1023px) {
+    justify-content: flex-start;
+    margin: 1rem 0 0 -1.6rem;
+    width: 100%;
+    > div {
+      width: 100%;
+    }
+  }
 `;
 
 export const ProductsGroupHeader = styled.div`
   align-items: center;
   display: flex;
+  flex-direction: column;
   justify-content: space-between;
   margin: 0 0 1.6rem 0;
+
+  @media screen and (min-width: ${breakpoint('sm')}) {
+    flex-direction: row;
+  }
 `;
 
 export const ProductsGroupBody = styled.div`
