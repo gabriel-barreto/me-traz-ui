@@ -2,16 +2,21 @@ import React, { useState } from 'react';
 
 import brand from '../../assets/brand-sm.png';
 
-import SearchForm from '../SearchForm';
+import { useProductsContext } from '../../contexts';
 import { Close, Search, Whatsapp } from '../../styles/icons.styles';
+
+import SearchForm from '../SearchForm';
 
 import * as S from './styled';
 
 function Navbar() {
   const [state, setState] = useState({ searchFormVisible: false });
+  const { setSearch } = useProductsContext();
 
   function toggleSearchForm() {
     const searchFormVisible = !state.searchFormVisible;
+
+    setSearch('');
     setState((prev) => ({ ...prev, searchFormVisible }));
   }
 
