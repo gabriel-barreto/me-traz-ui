@@ -1,18 +1,27 @@
 import PropTypes from 'prop-types';
 import React from 'react';
 
+import { useProductsContext } from '../../contexts';
+
 import * as S from './styled';
 
 function SearchForm({ className }) {
-  function onSubmitHandler(e) {
-    e.preventDefault();
+  const { search, setSearch } = useProductsContext();
+
+  function onChangeHandler({ target }) {
+    const { value } = target;
+    setSearch(value);
   }
 
   return (
-    <S.SearchForm className={className} onSubmit={onSubmitHandler}>
+    <S.SearchForm className={className}>
       <S.SearchField
+        id="search"
+        name="search"
         placeholder="O que posso levar para você hoje?"
         type="text"
+        value={search}
+        onChange={onChangeHandler}
         required
       />
     </S.SearchForm>
