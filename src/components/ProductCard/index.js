@@ -50,24 +50,18 @@ function ProductCard({
   );
 }
 
-export const Type = {
-  currency: PropTypes.string,
-  description: PropTypes.string.isRequired,
-  photo: PropTypes.shape({ url: PropTypes.string }),
-  price: PropTypes.oneOfType([PropTypes.number, PropTypes.string]).isRequired,
-  title: PropTypes.string.isRequired,
-};
-
 ProductCard.defaultProps = {
   currency: 'R$',
   photo: { url: '' },
 };
 ProductCard.propTypes = {
-  ...Type,
   currency: PropTypes.string,
+  description: PropTypes.string.isRequired,
   onAddToCart: PropTypes.func.isRequired,
   onClick: PropTypes.func.isRequired,
   photo: PropTypes.shape({ url: PropTypes.string }),
+  price: PropTypes.oneOfType([PropTypes.number, PropTypes.string]).isRequired,
+  title: PropTypes.string.isRequired,
 };
 
 export default ProductCard;

@@ -6,7 +6,7 @@ import * as S from './styled';
 
 import FilterByForm from '../FilterByForm';
 import OrderByForm from '../OrderByForm';
-import ProductCard, { Type as ProductType } from '../ProductCard';
+import ProductCard from '../ProductCard';
 
 function ProductsGroup({ onProductClick, products, title }) {
   const [state, setState] = useState({ filter: '', order: '', list: products });
@@ -79,6 +79,12 @@ function ProductsGroup({ onProductClick, products, title }) {
     </S.ProductsGroup>
   );
 }
+
+const ProductType = Object.fromEntries(
+  Object.keys(ProductCard.propTypes)
+    .filter((each) => each.substring(0, 2) !== 'on')
+    .map((each) => [each, ProductCard.propTypes[each]]),
+);
 
 ProductsGroup.defaultProps = { products: [] };
 ProductsGroup.propTypes = {
