@@ -1,6 +1,7 @@
 import React from 'react';
 import { BrowserRouter } from 'react-router-dom';
 import { addDecorator, configure } from '@storybook/react';
+import { withKnobs } from '@storybook/addon-knobs';
 import styled, { ThemeProvider } from 'styled-components';
 
 import { GlobalStyle, Theme } from '../src/styles';
@@ -24,9 +25,10 @@ const withTheme = (storyFn) => (
   <ThemeProvider theme={Theme}>{storyFn()}</ThemeProvider>
 );
 
+addDecorator(withGlobalStyle);
+addDecorator(withKnobs);
 addDecorator(withRouter);
 addDecorator(withTheme);
-addDecorator(withGlobalStyle);
 
 // automatically import all files ending in *.stories.js
 configure(require.context('../src/stories', true, /\.stories\.js$/), module);
