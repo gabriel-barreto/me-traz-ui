@@ -3,7 +3,7 @@ import React, { useEffect } from 'react';
 import { $product } from '../../services';
 
 import { useProductsContext } from '../../contexts';
-import { Layout, ProductsGroup } from '../../components';
+import { Layout, ProductsGroup, ProductModal } from '../../components';
 
 function HomePage() {
   const { products, setProducts, search } = useProductsContext();
@@ -29,6 +29,7 @@ function HomePage() {
   return (
     <Layout>
       <ProductsGroup title="Todos" products={list} />
+      <ProductModal />
     </Layout>
   );
 }
