@@ -4,16 +4,36 @@ import { breakpoint } from '../../styles';
 
 export const ProductModalWrapper = styled.div`
   align-items: center;
-  background-color: ${({ theme }) => theme.chromaColors.darkest.alpha(0.48)};
   display: flex;
   justify-content: center;
   min-height: 100vh;
   height: 100%;
   left: 0;
   position: fixed;
+  opacity: 0;
+  visibility: hidden;
+  top: 0;
+  transition: opacity 400ms, visibility 400ms;
+  width: 100%;
+  will-change: opacity, visibility;
+  z-index: 999;
+
+  &.--visible {
+    opacity: 1;
+    visibility: visible;
+  }
+`;
+
+export const ProductModalOverlay = styled.div`
+  background-color: ${({ theme }) => theme.chromaColors.darkest.alpha(0.64)};
+  background-blend-mode: multiply;
+  height: 100%;
+  left: 0;
+  min-height: 100vh;
+  position: fixed;
   top: 0;
   width: 100%;
-  z-index: 999;
+  z-index: 99;
 `;
 
 export const HeaderBackground = styled.div`
@@ -65,6 +85,7 @@ export const ModalCloseButton = styled.button`
   fill: ${({ theme }) => theme.hexColors.lightest};
   height: 4.4rem;
   justify-content: center;
+  outline-color: ${({ theme }) => theme.hexColors.primary};
   position: absolute;
   right: 0;
   top: 0;
@@ -113,4 +134,5 @@ export const ModalDialog = styled.div`
   overflow-y: scroll;
   position: relative;
   width: 88%;
+  z-index: 999;
 `;
