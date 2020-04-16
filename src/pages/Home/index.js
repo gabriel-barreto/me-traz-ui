@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 
 import { $product } from '../../services';
 
@@ -6,6 +6,7 @@ import { useProductsContext } from '../../contexts';
 import { Layout, ProductsGroup, ProductModal } from '../../components';
 
 function HomePage() {
+  const [state, setState] = useState({ productModalVisible: false });
   const { products, setProducts, search } = useProductsContext();
   useEffect(() => {
     $product
@@ -28,8 +29,19 @@ function HomePage() {
 
   return (
     <Layout>
-      <ProductsGroup title="Todos" products={list} />
-      <ProductModal />
+      <ProductsGroup
+        title="Todos"
+        products={list}
+        onProductClick={() =>
+          setState((prev) => ({ ...prev, productModalVisible: true }))
+        }
+      />
+      <ProductModal
+        visible={state.productModalVisible}
+        onClose={() =>
+          setState((prev) => ({ ...prev, productModalVisible: false }))
+        }
+      />
     </Layout>
   );
 }
