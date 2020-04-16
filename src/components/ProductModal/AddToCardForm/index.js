@@ -3,12 +3,12 @@ import PropTypes from 'prop-types';
 
 import * as S from './styled';
 
-function AddToCartForm({ total }) {
+function AddToCartForm({ onQttChange, total }) {
   return (
     <S.AddToCartForm method="POST" onSubmit={(e) => e.preventDefault()}>
       <S.AddToCartQttField>
         <S.QttFieldLabel>Quantidade:</S.QttFieldLabel>
-        <S.QttFieldInput min={1} max={99} />
+        <S.QttFieldInput min={1} max={99} onChange={onQttChange} />
       </S.AddToCartQttField>
       <S.AddToCartButton>
         <S.AddToCartTotal>
@@ -24,6 +24,7 @@ function AddToCartForm({ total }) {
 }
 
 AddToCartForm.propTypes = {
+  onQttChange: PropTypes.func.isRequired,
   total: PropTypes.oneOfType([PropTypes.string, PropTypes.number]).isRequired,
 };
 

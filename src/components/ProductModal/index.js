@@ -34,9 +34,26 @@ function ProductModal({ onClose, visible }) {
   const [state, setState] = useState({
     additional,
     ingredients,
+    qtt: 1,
     total: price,
     addedAdditional: [],
   });
+
+  function sumAdditional(addedAdditional = state.addedAdditional) {
+    return addedAdditional.reduce(
+      (prev, curr) => prev + curr.itemPrice * curr.qtt,
+      0,
+    );
+  }
+
+  function sumOrder(qtt = state.qtt, addedAdditional = state.addedAdditional) {
+    const additionalTotal = sumAdditional(addedAdditional);
+    return price * qtt + additionalTotal;
+  }
+
+  function onQttChange(qtt) {
+    return setState((prev) => ({ ...prev, qtt, total: sumOrder(qtt) }));
+  }
 
   function onIngredientToggle({ label, selected }) {
     const { ingredients: updated } = state;
@@ -56,14 +73,10 @@ function ProductModal({ onClose, visible }) {
       addedAdditional.splice(foundIndex, 1, { item, itemPrice, qtt });
     else addedAdditional.push({ item, itemPrice, qtt });
 
-    const additionalTotal = addedAdditional.reduce(
-      (prev, curr) => prev + curr.itemPrice * curr.qtt,
-      0,
-    );
     setState((prev) => ({
       ...prev,
       addedAdditional,
-      total: price + additionalTotal,
+      total: sumOrder(state.qtt, addedAdditional),
     }));
   }
 
@@ -108,7 +121,7 @@ function ProductModal({ onClose, visible }) {
           </ItemsGroup>
         </S.ModalDialogBody>
         <S.ModalDialogFooter>
-          <AddToCartForm total={state.total} />
+          <AddToCartForm total={state.total} onQttChange={onQttChange} />
         </S.ModalDialogFooter>
       </S.ModalDialog>
     </S.ProductModalWrapper>
