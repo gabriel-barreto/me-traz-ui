@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import PropTypes from 'prop-types';
 
 import { Close } from '../../styles/icons.styles';
 
@@ -8,7 +9,7 @@ import ItemsGroup from './ItemsGroup';
 import IngredientItem from './IngredientItem';
 import * as S from './styled';
 
-function ProductModal() {
+function ProductModal({ onClose, visible }) {
   const title = 'Strogonoff de Frango';
   const description =
     'Porção individual. Strogonoff de Frango num molho cremoso a base' +
@@ -67,7 +68,8 @@ function ProductModal() {
   }
 
   return (
-    <S.ProductModalWrapper>
+    <S.ProductModalWrapper className={`${visible ? '--visible' : ''}`}>
+      <S.ProductModalOverlay onClick={onClose} />
       <S.ModalDialog>
         <S.ModalDialogHeader>
           <S.HeaderBackground alt={title} title={title} src={photo} />
@@ -76,7 +78,7 @@ function ProductModal() {
             <S.HeaderDescriptions>{description}</S.HeaderDescriptions>
           </S.HeaderTitleContainer>
 
-          <S.ModalCloseButton title="Fechar" alt="Fechar">
+          <S.ModalCloseButton title="Fechar" alt="Fechar" onClick={onClose}>
             <Close size={24} />
           </S.ModalCloseButton>
         </S.ModalDialogHeader>
@@ -112,5 +114,11 @@ function ProductModal() {
     </S.ProductModalWrapper>
   );
 }
+
+ProductModal.defaultProps = { visible: false };
+ProductModal.propTypes = {
+  onClose: PropTypes.func.isRequired,
+  visible: PropTypes.bool,
+};
 
 export default ProductModal;

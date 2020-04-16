@@ -3,9 +3,17 @@ import React from 'react';
 
 import * as S from './styled';
 
-function ProductCard({ currency, description, photo, price, title }) {
+function ProductCard({
+  currency,
+  description,
+  onAddToCart,
+  onClick,
+  photo,
+  price,
+  title,
+}) {
   return (
-    <S.ProductCardWrapper>
+    <S.ProductCardWrapper onClick={onClick}>
       <S.ProductCardPhoto src={photo.url} alt={title} title={title} />
       <S.ProductCardBody>
         <S.ProductCardTitle>
@@ -23,7 +31,7 @@ function ProductCard({ currency, description, photo, price, title }) {
           </S.ProductCardValue>
         </S.ProductCardPrice>
       </S.ProductCardBody>
-      <S.ProductCardAddToCardButton>
+      <S.ProductCardAddToCardButton onClick={onAddToCart}>
         <svg viewBox="0 0 40 40" preserveAspectRatio="xMidYMid meet">
           <g clipPath="url(#clip0)">
             <path
@@ -50,7 +58,16 @@ export const Type = {
   title: PropTypes.string.isRequired,
 };
 
-ProductCard.defaultProps = { currency: 'R$', photo: { url: '' } };
-ProductCard.propTypes = Type;
+ProductCard.defaultProps = {
+  currency: 'R$',
+  photo: { url: '' },
+};
+ProductCard.propTypes = {
+  ...Type,
+  currency: PropTypes.string,
+  onAddToCart: PropTypes.func.isRequired,
+  onClick: PropTypes.func.isRequired,
+  photo: PropTypes.shape({ url: PropTypes.string }),
+};
 
 export default ProductCard;
