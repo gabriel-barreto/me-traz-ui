@@ -1,6 +1,8 @@
 import React, { useEffect, useState, useRef } from 'react';
 import PropTypes from 'prop-types';
 
+import { useCart } from '../../contexts';
+
 import { Close } from '../../styles/icons.styles';
 
 import AdditionalItem from './AdditionalItem';
@@ -10,6 +12,7 @@ import IngredientItem from './IngredientItem';
 import * as S from './styled';
 
 function ProductModal({
+  _id,
   additional,
   description,
   ingredients,
@@ -17,6 +20,7 @@ function ProductModal({
   price,
   onClose,
   title,
+  updateMode,
   visible,
 }) {
   const [state, setState] = useState({
@@ -27,6 +31,7 @@ function ProductModal({
     addedAdditional: [],
   });
   const modalDialogRef = useRef();
+  const { cart, setCart } = useCart();
 
   function sumAdditional(addedAdditional = state.addedAdditional) {
     return addedAdditional.reduce(
@@ -67,6 +72,31 @@ function ProductModal({
       addedAdditional,
       total: sumOrder(state.qtt, addedAdditional),
     }));
+  }
+
+  function buildCartPayload() {
+    const { qtt, total, addedAdditional } = state;
+    const additionalTotal = sumAdditional();
+    return { _id, additionalTotal, addedAdditional, price, qtt, title, total };
+  }
+
+  function addToCart() {
+    setCart((prev) => ({
+      ...prev,
+      items: [...prev.items, buildCartPayload()],
+    }));
+    return onClose();
+  }
+
+  function updateCartEntry() {
+    const found = cart.items.findIndex((each) => each._id === _id);
+    const updatedItems = [...cart.items];
+    const payload = buildCartPayload();
+
+    updatedItems.splice(found, 1, payload);
+    setCart((prev) => ({ ...prev, items: updatedItems }));
+
+    return onClose();
   }
 
   useEffect(() => {
@@ -114,7 +144,13 @@ function ProductModal({
           </ItemsGroup>
         </S.ModalDialogBody>
         <S.ModalDialogFooter>
-          <AddToCartForm total={state.total} onQttChange={onQttChange} />
+          <AddToCartForm
+            total={state.total}
+            onAddToCart={addToCart}
+            onUpdateEntry={updateCartEntry}
+            onQttChange={onQttChange}
+            updateMode={updateMode}
+          />
         </S.ModalDialogFooter>
       </S.ModalDialog>
     </S.ProductModalWrapper>
@@ -124,10 +160,12 @@ function ProductModal({
 ProductModal.defaultProps = {
   additional: [],
   ingredients: [],
-  visible: false,
   photo: { url: '' },
+  visible: false,
+  updateMode: false,
 };
 ProductModal.propTypes = {
+  _id: PropTypes.string.isRequired,
   additional: PropTypes.arrayOf(
     PropTypes.shape({
       label: PropTypes.string.isRequired,
@@ -146,6 +184,7 @@ ProductModal.propTypes = {
   price: PropTypes.oneOfType([PropTypes.string, PropTypes.number]).isRequired,
   onClose: PropTypes.func.isRequired,
   title: PropTypes.string.isRequired,
+  updateMode: PropTypes.bool,
   visible: PropTypes.bool,
 };
 
