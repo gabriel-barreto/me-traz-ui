@@ -10,6 +10,7 @@ function HomePage() {
   const [state, setState] = useState({
     productModalVisible: false,
     selectedProduct: {
+      _id: '',
       description: '',
       title: '',
       price: 0,
