@@ -8,7 +8,7 @@ import FilterByForm from '../FilterByForm';
 import OrderByForm from '../OrderByForm';
 import ProductCard from '../ProductCard';
 
-function ProductsGroup({ onProductClick, products, title }) {
+function ProductsGroup({ onAddToCart, onProductClick, products, title }) {
   const [state, setState] = useState({ filter: '', order: '', list: products });
   const tags = products.map((each) => each.tags).flatMap((each) => each);
   const orderParams = [
@@ -72,7 +72,7 @@ function ProductsGroup({ onProductClick, products, title }) {
             {...each}
             key={each._id}
             onClick={() => onProductClick(each)}
-            onAddToCart={() => {}}
+            onAddToCart={() => onAddToCart(each)}
           />
         ))}
       </S.ProductsGroupBody>
@@ -88,6 +88,7 @@ const ProductType = Object.fromEntries(
 
 ProductsGroup.defaultProps = { products: [] };
 ProductsGroup.propTypes = {
+  onAddToCart: PropTypes.func.isRequired,
   onProductClick: PropTypes.func.isRequired,
   products: PropTypes.arrayOf(PropTypes.shape(ProductType)),
   title: PropTypes.string.isRequired,
