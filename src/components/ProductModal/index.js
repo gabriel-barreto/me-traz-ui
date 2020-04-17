@@ -73,7 +73,7 @@ function ProductModal({
       <S.ProductModalOverlay onClick={onClose} />
       <S.ModalDialog>
         <S.ModalDialogHeader>
-          <S.HeaderBackground alt={title} title={title} src={photo} />
+          <S.HeaderBackground alt={title} title={title} src={photo.url} />
           <S.HeaderTitleContainer>
             <S.HeaderTitle>{title}</S.HeaderTitle>
             <S.HeaderDescriptions>{description}</S.HeaderDescriptions>
