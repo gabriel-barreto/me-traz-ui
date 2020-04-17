@@ -82,7 +82,9 @@ export const ProductCardBody = styled.div`
   }
 `;
 
-export const ProductCardWrapper = styled.section`
+export const ProductCardContainer = styled.section``;
+
+export const ProductCardWrapper = styled.div`
   background-color: ${({ theme }) => theme.hexColors.lightest};
   border-radius: ${cardRadius};
   box-shadow: 1px 2px 4px
