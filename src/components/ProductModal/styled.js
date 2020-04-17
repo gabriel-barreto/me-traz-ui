@@ -37,10 +37,11 @@ export const ProductModalOverlay = styled.div`
 `;
 
 export const HeaderBackground = styled.div`
-  background-image: url(${(props) => props.src});
-  background-position: top center;
-  background-repeat: no-repeat;
-  background-size: cover;
+  background-image: ${({ src, theme }) =>
+    src ? `url(${src})` : theme.seamlessPattern};
+  background-position: ${({ src }) => (src ? 'top center' : 'center bottom')};
+  background-repeat: ${({ src }) => (src ? 'no-repeat' : 'repeat')};
+  background-size: ${({ src }) => (src ? 'cover' : 'initial')};
   height: 32rem;
   margin: 0 0 -4.8rem 0;
   width: 100%;
