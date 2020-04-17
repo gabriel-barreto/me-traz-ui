@@ -6,8 +6,16 @@ import { useProductsContext } from '../../contexts';
 import { Layout, ProductsGroup, ProductModal } from '../../components';
 
 function HomePage() {
-  const [state, setState] = useState({ productModalVisible: false });
   const { products, setProducts, search } = useProductsContext();
+  const [state, setState] = useState({
+    productModalVisible: false,
+    selectedProduct: {
+      description: '',
+      title: '',
+      price: 0,
+    },
+  });
+
   useEffect(() => {
     $product
       .fetchAll()
@@ -32,11 +40,16 @@ function HomePage() {
       <ProductsGroup
         title="Todos"
         products={list}
-        onProductClick={() =>
-          setState((prev) => ({ ...prev, productModalVisible: true }))
+        onProductClick={(product) =>
+          setState((prev) => ({
+            ...prev,
+            productModalVisible: true,
+            selectedProduct: product,
+          }))
         }
       />
       <ProductModal
+        {...state.selectedProduct}
         visible={state.productModalVisible}
         onClose={() =>
           setState((prev) => ({ ...prev, productModalVisible: false }))
