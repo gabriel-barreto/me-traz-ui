@@ -9,31 +9,19 @@ import ItemsGroup from './ItemsGroup';
 import IngredientItem from './IngredientItem';
 import * as S from './styled';
 
-function ProductModal({ onClose, visible }) {
-  const title = 'Strogonoff de Frango';
-  const description =
-    'Porção individual. Strogonoff de Frango num molho cremoso a base' +
-    ' de creme de leite e tempero especial com arroz e batata palha num' +
-    ' pacote separado.';
-  const photo =
-    'https://portal-amb-imgs.clubedaana.com.br/2018/07/estrogonofe-de-frango-2-1920x1080.jpg';
-  const price = 23.99;
-
-  const ingredients = [
-    { label: 'Arroz', required: true, selected: true },
-    { label: 'Batata Palha', required: false, selected: true },
-    { label: 'Champignom', required: false, selected: true },
-  ];
-  const additional = [
-    { label: 'Coca-Cola Lata (350mL)', price: 4 },
-    { label: 'Coca-Cola 500mL', price: 7 },
-    { label: 'Coca-Cola 1.5L', price: 8 },
-    { label: 'Coca-Cola 2L', price: 9 },
-  ];
-
+function ProductModal({
+  additional,
+  description,
+  ingredients,
+  photo,
+  price,
+  onClose,
+  title,
+  visible,
+}) {
   const [state, setState] = useState({
     additional,
-    ingredients,
+    ingredients: ingredients.map((each) => ({ ...each, selected: true })),
     qtt: 1,
     total: price,
     addedAdditional: [],
@@ -128,9 +116,31 @@ function ProductModal({ onClose, visible }) {
   );
 }
 
-ProductModal.defaultProps = { visible: false };
+ProductModal.defaultProps = {
+  additional: [],
+  ingredients: [],
+  visible: false,
+  photo: { url: '' },
+};
 ProductModal.propTypes = {
+  additional: PropTypes.arrayOf(
+    PropTypes.shape({
+      label: PropTypes.string.isRequired,
+      price: PropTypes.oneOfType([PropTypes.string, PropTypes.number])
+        .isRequired,
+    }),
+  ),
+  description: PropTypes.string.isRequired,
+  ingredients: PropTypes.arrayOf(
+    PropTypes.shape({
+      label: PropTypes.string.isRequired,
+      required: PropTypes.bool.isRequired,
+    }),
+  ),
+  photo: PropTypes.shape({ url: PropTypes.string }),
+  price: PropTypes.oneOfType([PropTypes.string, PropTypes.number]).isRequired,
   onClose: PropTypes.func.isRequired,
+  title: PropTypes.string.isRequired,
   visible: PropTypes.bool,
 };
 
