@@ -2,10 +2,11 @@ import React, { useEffect, useState } from 'react';
 
 import { $product } from '../../services';
 
-import { useProductsContext } from '../../contexts';
+import { useProductsContext, useCart } from '../../contexts';
 import { Layout, ProductsGroup, ProductModal } from '../../components';
 
 function HomePage() {
+  const { setCart } = useCart();
   const { products, setProducts, search } = useProductsContext();
   const [state, setState] = useState({
     productModalVisible: false,
@@ -16,6 +17,19 @@ function HomePage() {
       price: 0,
     },
   });
+
+  function onAddToCart({ _id, title, price }) {
+    const payload = {
+      _id,
+      title,
+      price,
+      addedAdditional: [],
+      additionalTotal: 0,
+      qtt: 1,
+      total: price,
+    };
+    return setCart((prev) => ({ ...prev, items: [...prev.items, payload] }));
+  }
 
   useEffect(() => {
     $product
@@ -41,6 +55,7 @@ function HomePage() {
       <ProductsGroup
         title="Todos"
         products={list}
+        onAddToCart={onAddToCart}
         onProductClick={(product) =>
           setState((prev) => ({
             ...prev,
