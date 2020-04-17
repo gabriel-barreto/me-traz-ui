@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState, useRef } from 'react';
 import PropTypes from 'prop-types';
 
 import { Close } from '../../styles/icons.styles';
@@ -26,6 +26,7 @@ function ProductModal({
     total: price,
     addedAdditional: [],
   });
+  const modalDialogRef = useRef();
 
   function sumAdditional(addedAdditional = state.addedAdditional) {
     return addedAdditional.reduce(
@@ -68,10 +69,14 @@ function ProductModal({
     }));
   }
 
+  useEffect(() => {
+    modalDialogRef.current.scrollTo({ top: 0, behavior: 'smooth' });
+  }, [title]);
+
   return (
     <S.ProductModalWrapper className={`${visible ? '--visible' : ''}`}>
       <S.ProductModalOverlay onClick={onClose} />
-      <S.ModalDialog>
+      <S.ModalDialog ref={modalDialogRef}>
         <S.ModalDialogHeader>
           <S.HeaderBackground alt={title} title={title} src={photo.url} />
           <S.HeaderTitleContainer>
