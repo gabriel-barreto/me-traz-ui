@@ -3,7 +3,12 @@ import React, { useEffect, useState } from 'react';
 import { $product } from '../../services';
 
 import { useProductsContext, useCart } from '../../contexts';
-import { Layout, ProductsGroup, ProductModal } from '../../components';
+import {
+  Layout,
+  ProductsGroup,
+  ProductModal,
+  ViewCartButton,
+} from '../../components';
 
 function HomePage() {
   const { setCart } = useCart();
@@ -64,6 +69,7 @@ function HomePage() {
           }))
         }
       />
+
       <ProductModal
         {...state.selectedProduct}
         visible={state.productModalVisible}
@@ -71,6 +77,8 @@ function HomePage() {
           setState((prev) => ({ ...prev, productModalVisible: false }))
         }
       />
+
+      <ViewCartButton />
     </Layout>
   );
 }
