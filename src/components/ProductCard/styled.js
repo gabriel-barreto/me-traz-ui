@@ -59,6 +59,8 @@ export const ProductCardAddToCardButton = styled.button`
   right: 0;
   width: ${addToCardButtonSize};
   > svg {
+    color: ${({ theme }) => theme.hexColors.lightest};
+    fill: ${({ theme }) => theme.hexColors.lightest};
     height: ${addToCardIconSize};
     width: ${addToCardIconSize};
   }
