@@ -15,7 +15,7 @@ export function CartProvider({ children }) {
   }
 
   useEffect(() => {
-    if (!cart.pure) toast.success('Carrinho Atualizado!');
+    if (!cart.pure) toast.success('Sacola Atualizado!');
   }, [cart]);
 
   return (
