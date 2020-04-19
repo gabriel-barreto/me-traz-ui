@@ -37,6 +37,7 @@ function SpinInput({ min, max, onChange, stage }) {
       <S.SpinInputButton
         alt="Remover"
         title="Remover"
+        type="button"
         onClick={() => updateCount('remove')}
       >
         -
@@ -51,6 +52,7 @@ function SpinInput({ min, max, onChange, stage }) {
       <S.SpinInputButton
         alt="Adicionar"
         title="Adicionar"
+        type="button"
         onClick={() => updateCount('add')}
       >
         +
