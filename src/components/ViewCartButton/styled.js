@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import { Link } from 'react-router-dom';
 
 const BUTTON_SIZE = '6.4rem';
 const COUNTER_SIZE = '3.2rem';
@@ -28,7 +29,7 @@ export const ViewCartButtonCounter = styled.p`
   width: ${COUNTER_SIZE};
 `;
 
-export const ViewCartButtonWrapper = styled.button`
+export const ViewCartButtonWrapper = styled(Link)`
   background-color: ${({ theme }) => theme.hexColors.primaryDark};
   border: none;
   border-radius: 50%;
@@ -40,6 +41,7 @@ export const ViewCartButtonWrapper = styled.button`
   opacity: 0;
   position: fixed;
   right: 8px;
+  text-decoration: none;
   transition: background-color, opacity, transform, visibility;
   transition-duration: 400ms;
   visibility: hidden;

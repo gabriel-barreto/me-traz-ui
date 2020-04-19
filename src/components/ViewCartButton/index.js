@@ -11,7 +11,10 @@ function ViewCartButton() {
   const fancyQtt = (() => (qtt > 9 ? '9+' : qtt))();
 
   return (
-    <S.ViewCartButtonWrapper className={qtt > 0 ? '--visible' : ''}>
+    <S.ViewCartButtonWrapper
+      className={qtt > 0 ? '--visible' : ''}
+      to="/sacola"
+    >
       <S.ViewCartButtonCounter>{fancyQtt}</S.ViewCartButtonCounter>
       <S.ViewCartButtonIcon>
         <ShoppingBag size={24} />
