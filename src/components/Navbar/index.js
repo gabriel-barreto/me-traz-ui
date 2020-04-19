@@ -1,4 +1,6 @@
 import React, { useState } from 'react';
+import { useLocation } from 'react-router-dom';
+import PropTypes from 'prop-types';
 
 import brand from '../../assets/brand-sm.png';
 
@@ -9,9 +11,14 @@ import SearchForm from '../SearchForm';
 
 import * as S from './styled';
 
+function SearchActionIcon({ isVisible }) {
+  return isVisible ? <Close size={24} /> : <Search size={24} />;
+}
+
 function Navbar() {
   const [state, setState] = useState({ searchFormVisible: false });
   const { setSearch } = useProductsContext();
+  const { pathname } = useLocation();
 
   function toggleSearchForm() {
     const searchFormVisible = !state.searchFormVisible;
@@ -35,13 +42,16 @@ function Navbar() {
       </S.NavSearchFormContainer>
 
       <S.NavActions>
-        <S.NavSearchFormToggler
-          onClick={toggleSearchForm}
-          alt={searchTogglerTitle}
-          title={searchTogglerTitle}
-        >
-          {state.searchFormVisible ? <Close size={24} /> : <Search size={24} />}
-        </S.NavSearchFormToggler>
+        {!pathname.includes('sacola') ? (
+          <S.NavSearchFormToggler
+            alt={searchTogglerTitle}
+            title={searchTogglerTitle}
+            onClick={toggleSearchForm}
+          >
+            <SearchActionIcon isVisible={state.searchFormVisible} />
+          </S.NavSearchFormToggler>
+        ) : null}
+
         <S.NavChatLink
           href="#"
           alt="Entrar em Contato pelo WhatsApp"
@@ -56,5 +66,8 @@ function Navbar() {
     </S.Navbar>
   );
 }
+
+SearchActionIcon.defaultProps = { isVisible: false };
+SearchActionIcon.propTypes = { isVisible: PropTypes.bool };
 
 export default Navbar;
