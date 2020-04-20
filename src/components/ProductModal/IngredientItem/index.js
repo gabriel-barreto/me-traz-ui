@@ -5,8 +5,8 @@ import { Check } from '../../../styles/icons.styles';
 
 import * as S from './styled';
 
-function IngredientItem({ label, locked, onClick, state }) {
-  const [selected, setSelected] = useState(state);
+function IngredientItem({ label, locked, onClick }) {
+  const [selected, setSelected] = useState(true);
 
   function onClickHandler() {
     if (!locked) setSelected(!selected);
@@ -27,12 +27,11 @@ function IngredientItem({ label, locked, onClick, state }) {
   );
 }
 
-IngredientItem.defaultProps = { state: true, locked: false };
+IngredientItem.defaultProps = { locked: false };
 IngredientItem.propTypes = {
   label: PropTypes.string.isRequired,
   locked: PropTypes.bool,
   onClick: PropTypes.func.isRequired,
-  state: PropTypes.bool,
 };
 
 export default IngredientItem;
