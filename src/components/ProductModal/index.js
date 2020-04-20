@@ -24,8 +24,7 @@ function ProductModal({
   visible,
 }) {
   const [state, setState] = useState({
-    additional,
-    ingredients: ingredients.map((each) => ({ ...each, selected: true })),
+    ingredients: [],
     qtt: 1,
     total: price,
     addedAdditional: [],
@@ -75,9 +74,14 @@ function ProductModal({
   }
 
   function buildCartPayload() {
-    const { qtt, total, addedAdditional } = state;
     const additionalTotal = sumAdditional();
-    return { _id, additionalTotal, addedAdditional, price, qtt, title, total };
+    return {
+      ...state,
+      _id,
+      additionalTotal,
+      price,
+      title,
+    };
   }
 
   function addToCart() {
@@ -98,6 +102,13 @@ function ProductModal({
 
     return onClose();
   }
+
+  useEffect(() => {
+    setState((prev) => ({
+      ...prev,
+      ingredients: ingredients.map((each) => ({ ...each, selected: true })),
+    }));
+  }, [ingredients]);
 
   useEffect(() => {
     modalDialogRef.current.scrollTo({ top: 0, behavior: 'smooth' });
