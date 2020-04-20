@@ -5,7 +5,12 @@ import PropTypes from 'prop-types';
 import brand from '../../assets/brand-sm.png';
 
 import { useProductsContext } from '../../contexts';
-import { Close, Search, Whatsapp } from '../../styles/icons.styles';
+import {
+  ChevronLeft,
+  Close,
+  Search,
+  Whatsapp,
+} from '../../styles/icons.styles';
 
 import SearchForm from '../SearchForm';
 
@@ -33,7 +38,14 @@ function Navbar() {
 
   return (
     <S.Navbar>
-      <S.NavBrand src={brand} tilte="Me Traz" alt="Me Traz" />
+      <S.NavBrandWrapper>
+        {pathname !== '/' ? (
+          <S.NavGoBackLink alt="Voltar" title="Voltar" to="/">
+            <ChevronLeft size={32} />
+          </S.NavGoBackLink>
+        ) : null}
+        <S.NavBrand src={brand} tilte="Me Traz" alt="Me Traz" />
+      </S.NavBrandWrapper>
 
       <S.NavSearchFormContainer
         className={`${state.searchFormVisible ? '--visible' : ''}`}

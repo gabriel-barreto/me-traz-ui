@@ -1,4 +1,5 @@
 import styled, { css } from 'styled-components';
+import { Link } from 'react-router-dom';
 
 import { breakpoint } from '../../styles';
 
@@ -10,6 +11,35 @@ export const NavBrand = styled.img`
   object-fit: contain;
   object-position: center;
   width: auto;
+`;
+
+export const NavGoBackLink = styled(Link)`
+  align-items: center;
+  color: ${({ theme }) => theme.hexColors.primary};
+  display: flex;
+  height: 4.8rem;
+  justify-content: center;
+  outline-color: ${({ theme }) => theme.hexColors.primary};
+  transition: color, transform;
+  transition-duration: 400ms;
+  width: 4.8rem;
+
+  &:hover {
+    color: ${({ theme }) => theme.hexColors.primaryDark};
+  }
+  &:active {
+    transform: scale(0.88);
+  }
+`;
+
+export const NavBrandWrapper = styled.div`
+  align-items: center;
+  display: flex;
+  justify-content: center;
+
+  > ${NavGoBackLink} {
+    margin: 0 0.8rem 0 0;
+  }
 `;
 
 const NavSearchFormVisible = css`
