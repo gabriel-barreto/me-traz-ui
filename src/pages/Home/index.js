@@ -13,6 +13,7 @@ import {
 function HomePage() {
   const { setCart } = useCart();
   const { products, setProducts, search } = useProductsContext();
+
   const [state, setState] = useState({
     productModalVisible: false,
     selectedProduct: {
@@ -23,11 +24,12 @@ function HomePage() {
     },
   });
 
-  function onAddToCart({ _id, title, price }) {
+  function onAddToCart({ _id, ingredients, title, price }) {
     const payload = {
       _id,
       title,
       price,
+      ingredients: ingredients.map((each) => ({ ...each, selected: true })),
       addedAdditional: [],
       additionalTotal: 0,
       qtt: 1,
