@@ -2,6 +2,8 @@ import React, { createContext, useContext, useEffect, useState } from 'react';
 import { toast } from 'react-toastify';
 import PropTypes from 'prop-types';
 
+import { $CartStore } from '../utils';
+
 const INITIAL_STATE = { items: [], total: 0, pure: true };
 
 const CartContext = createContext(INITIAL_STATE);
@@ -11,12 +13,23 @@ export function CartProvider({ children }) {
 
   function setCart(action) {
     rawSetCart((prev) => ({ ...prev, pure: false }));
-    return rawSetCart(action);
+    rawSetCart(action);
+
+    return cart;
   }
 
   useEffect(() => {
-    if (!cart.pure) toast.success('Sacola Atualizado!');
+    if (!cart.pure) toast.success('Sacola Atualizada!');
+    if (cart.items.length > 0) $CartStore.set(cart);
   }, [cart]);
+
+  useEffect(() => {
+    const stored = $CartStore.get();
+    if (stored.items) {
+      if (Object.keys(stored).length)
+        rawSetCart((prev) => ({ ...prev, ...stored, pure: true }));
+    }
+  }, []);
 
   return (
     <CartContext.Provider value={{ cart, setCart }}>
