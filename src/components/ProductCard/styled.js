@@ -55,6 +55,7 @@ export const ProductCardAddToCardButton = styled.button`
   bottom: -32px;
   height: ${addToCardButtonSize};
   justify-content: center;
+  outline-color: transparent;
   position: absolute;
   right: 0;
   width: ${addToCardButtonSize};
