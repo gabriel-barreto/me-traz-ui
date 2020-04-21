@@ -4,7 +4,9 @@ import { useHistory } from 'react-router-dom';
 import { Layout } from '../../components';
 import { useCart } from '../../contexts';
 
+import CheckoutItem from './CheckoutItem';
 import EmptyCheckoutMessage from './EmptyMessage';
+import * as S from './styled';
 
 function CheckoutPage() {
   const { cart } = useCart();
@@ -17,7 +19,11 @@ function CheckoutPage() {
   return (
     <Layout>
       {cart.items.length ? (
-        cart.items.map(({ _id, title }) => <p key={_id}>{title}</p>)
+        <S.CheckoutItemsList>
+          {cart.items.map((each) => (
+            <CheckoutItem key={each._id} {...each} />
+          ))}
+        </S.CheckoutItemsList>
       ) : (
         <EmptyCheckoutMessage />
       )}
