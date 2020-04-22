@@ -12,7 +12,7 @@ function CheckoutItemIngredients({ ingredients }) {
     <S.CheckoutItemObs>
       {list.map((item) => (
         <S.CheckoutItemObsItem key={item}>
-          <S.CheckoutItemObsLabel>Sem {item}</S.CheckoutItemObsLabel>
+          <S.CheckoutItemObsLabel>{item}</S.CheckoutItemObsLabel>
         </S.CheckoutItemObsItem>
       ))}
     </S.CheckoutItemObs>
