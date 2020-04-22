@@ -1,6 +1,8 @@
 import styled from 'styled-components';
 import { Link } from 'react-router-dom';
 
+import { breakpoint } from '../../styles';
+
 const BUTTON_SIZE = '6.4rem';
 const COUNTER_SIZE = '3.2rem';
 const ICON_SIZE = '3.2rem';
@@ -59,6 +61,11 @@ export const ViewCartButtonWrapper = styled(Link)`
     align-items: center;
     display: flex;
     justify-content: center;
+  }
+
+  @media screen and (min-width: ${breakpoint('md')}) {
+    bottom: 16px;
+    right: 20px;
   }
 
   &:hover {
