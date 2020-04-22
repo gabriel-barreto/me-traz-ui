@@ -24,16 +24,19 @@ function HomePage() {
     },
   });
 
-  function onAddToCart({ _id, ingredients, title, price }) {
+  function onAddToCart(product) {
     const payload = {
-      _id,
-      title,
-      price,
-      ingredients: ingredients.map((each) => ({ ...each, selected: true })),
+      ...product,
+
       addedAdditional: [],
       additionalTotal: 0,
       qtt: 1,
-      total: price,
+
+      total: product.price,
+      ingredients: product.ingredients.map((each) => ({
+        ...each,
+        selected: true,
+      })),
     };
     return setCart((prev) => ({ ...prev, items: [...prev.items, payload] }));
   }
