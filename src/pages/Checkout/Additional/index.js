@@ -9,15 +9,16 @@ import * as S from '../CheckoutItem/styled';
 function CheckoutItemAdditional({ additional }) {
   const list = additional
     .filter((each) => each.qtt > 0)
-    .map(({ item, itemPrice }) => ({
+    .map(({ _id, item, itemPrice }) => ({
+      _id,
       item,
       itemPrice: $PriceFormatter.fancy(itemPrice),
     }));
 
   return list.length > 0 ? (
     <S.CheckoutItemObs>
-      {list.map(({ item, itemPrice }) => (
-        <S.CheckoutItemObsItem key={item}>
+      {list.map(({ _id, item, itemPrice }) => (
+        <S.CheckoutItemObsItem key={_id}>
           <S.CheckoutItemObsLabel>{item}</S.CheckoutItemObsLabel>
           <S.CheckoutItemPrice>
             <S.CheckoutItemPriceCurrency>+ R$</S.CheckoutItemPriceCurrency>
@@ -33,6 +34,7 @@ CheckoutItemAdditional.defaultProps = { additional: [] };
 CheckoutItemAdditional.propTypes = {
   additional: PropTypes.arrayOf(
     PropTypes.shape({
+      _id: PropTypes.string.isRequired,
       item: PropTypes.string.isRequired,
       itemPrice: PropTypes.oneOfType([PropTypes.number, PropTypes.string])
         .isRequired,
