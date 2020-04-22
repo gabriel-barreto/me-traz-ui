@@ -5,7 +5,11 @@ import * as S from './styled';
 
 import SpinInput from '../../SpinInput';
 
-function AdditionalItem({ label, min, max, onChange, price }) {
+function AdditionalItem({ _id, label, min, max, onChange, price }) {
+  function onQttChangeHandler(qtt) {
+    return onChange({ _id, qtt });
+  }
+
   return (
     <S.AdditionalItemContainer>
       <S.AdditionalInfoWrapper>
@@ -17,13 +21,14 @@ function AdditionalItem({ label, min, max, onChange, price }) {
           </S.AdditionalItemPriceValue>
         </S.AdditionalItemPrice>
       </S.AdditionalInfoWrapper>
-      <SpinInput min={min} max={max} onChange={onChange} />
+      <SpinInput min={min} max={max} onChange={onQttChangeHandler} />
     </S.AdditionalItemContainer>
   );
 }
 
 AdditionalItem.defaultProps = { max: 999, min: 0, onChange: () => {} };
 AdditionalItem.propTypes = {
+  _id: PropTypes.string.isRequired,
   label: PropTypes.string.isRequired,
   min: PropTypes.number,
   max: PropTypes.number,

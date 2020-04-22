@@ -50,19 +50,25 @@ function ProductModal({
     return setState((prev) => ({ ...prev, qtt, total: sumOrder(qtt) }));
   }
 
-  function onIngredientToggle({ label, selected }) {
+  function onIngredientToggle({ _id: itemId, selected }) {
     const { ingredients: updated } = state;
-    const ingredient = ingredients.find((each) => each.label === label);
-    const index = ingredients.findIndex((each) => each.label === label);
+    const ingredient = ingredients.find((each) => each._id === itemId);
+    const index = ingredients.findIndex((each) => each._id === itemId);
     const payload = { ...ingredient, selected };
 
     updated.splice(index, 1, payload);
     return setState((prev) => ({ ...prev, ingredients: updated }));
   }
 
-  function onAdditionalChanges({ item, itemPrice, qtt }) {
+  function onAdditionalChanges({ _id: itemId, qtt }) {
     const { addedAdditional } = state;
-    const foundIndex = addedAdditional.findIndex((each) => each.item === item);
+
+    const foundIndex = addedAdditional.findIndex(
+      ({ id: currItemId }) => currItemId === itemId,
+    );
+    const { item, price: itemPrice } = additional.find(
+      ({ _id: currItemId }) => currItemId === itemId,
+    );
 
     if (foundIndex > -1)
       addedAdditional.splice(foundIndex, 1, { item, itemPrice, qtt });
@@ -80,7 +86,10 @@ function ProductModal({
     return {
       ...state,
       _id,
+      additional,
       additionalTotal,
+      description,
+      photo,
       price,
       title,
     };
@@ -108,15 +117,12 @@ function ProductModal({
   }
 
   useEffect(() => {
+    modalDialogRef.current.scrollTo({ top: 0, behavior: 'smooth' });
     setState((prev) => ({
       ...prev,
-      ingredients: ingredients.map((each) => ({ ...each, selected: true })),
+      addedAdditional: [],
+      ingredients: [],
     }));
-  }, [ingredients]);
-
-  useEffect(() => {
-    modalDialogRef.current.scrollTo({ top: 0, behavior: 'smooth' });
-    setState((prev) => ({ ...prev, total: price, addedAdditional: [] }));
   }, [title]);
 
   return (
@@ -136,9 +142,10 @@ function ProductModal({
         </S.ModalDialogHeader>
         <S.ModalDialogBody>
           <ItemsGroup title="Ingredients">
-            {ingredients.map(({ label, required }) => (
+            {ingredients.map(({ _id: itemId, label, required }) => (
               <IngredientItem
-                key={label}
+                _id={itemId}
+                key={itemId}
                 label={label}
                 locked={required}
                 onClick={onIngredientToggle}
@@ -146,14 +153,13 @@ function ProductModal({
             ))}
           </ItemsGroup>
           <ItemsGroup title="Bora turbinar esse pedido?">
-            {additional.map(({ label, price: itemPrice }, i) => (
+            {additional.map(({ _id: itemId, label, price: itemPrice }) => (
               <AdditionalItem
-                key={i}
+                _id={itemId}
+                key={itemId}
                 label={label}
                 price={itemPrice}
-                onChange={(qtt) =>
-                  onAdditionalChanges({ item: label, itemPrice, qtt })
-                }
+                onChange={onAdditionalChanges}
               />
             ))}
           </ItemsGroup>

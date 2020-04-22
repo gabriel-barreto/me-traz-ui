@@ -5,7 +5,7 @@ import { Check } from '../../../styles/icons.styles';
 
 import * as S from './styled';
 
-function IngredientItem({ label, locked, onClick }) {
+function IngredientItem({ _id, label, locked, onClick }) {
   const [selected, setSelected] = useState(true);
 
   function onClickHandler() {
@@ -14,7 +14,7 @@ function IngredientItem({ label, locked, onClick }) {
     if (locked) return null;
 
     setSelected(updatedState);
-    return onClick({ label, selected: updatedState });
+    return onClick({ _id, selected: updatedState });
   }
 
   return (
@@ -33,6 +33,7 @@ function IngredientItem({ label, locked, onClick }) {
 
 IngredientItem.defaultProps = { locked: false };
 IngredientItem.propTypes = {
+  _id: PropTypes.string.isRequired,
   label: PropTypes.string.isRequired,
   locked: PropTypes.bool,
   onClick: PropTypes.func.isRequired,
