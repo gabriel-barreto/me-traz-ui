@@ -17,7 +17,9 @@ function ProductCard({
   return (
     <S.ProductCardWrapper>
       <S.ProductCardContainer onClick={onClick}>
-        <S.ProductCardPhoto src={photo.url} alt={title} title={title} />
+        {photo.url ? (
+          <S.ProductCardPhoto src={photo.url} alt={title} title={title} />
+        ) : null}
         <S.ProductCardBody>
           <S.ProductCardTitle>
             {title.length > 50 ? title.substring(0, 50) : title}
@@ -35,8 +37,12 @@ function ProductCard({
           </S.ProductCardPrice>
         </S.ProductCardBody>
       </S.ProductCardContainer>
-      <S.ProductCardAddToCardButton onClick={onAddToCart}>
-        <ShoppingBag size={24} />
+      <S.ProductCardAddToCardButton
+        alt="Colocar na Sacola"
+        title="Colocar na Sacola"
+        onClick={onAddToCart}
+      >
+        <ShoppingBag size={32} />
       </S.ProductCardAddToCardButton>
     </S.ProductCardWrapper>
   );
