@@ -9,8 +9,12 @@ function IngredientItem({ label, locked, onClick }) {
   const [selected, setSelected] = useState(true);
 
   function onClickHandler() {
-    if (!locked) setSelected(!selected);
-    return onClick({ label, selected });
+    const updatedState = !selected;
+
+    if (locked) return null;
+
+    setSelected(updatedState);
+    return onClick({ label, selected: updatedState });
   }
 
   return (
