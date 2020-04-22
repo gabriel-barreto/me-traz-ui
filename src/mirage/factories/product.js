@@ -7,10 +7,10 @@ const url =
   'https://img.elo7.com.br/product/zoom/26849BA/adesivo-parede-feijoada-prato-feito-comida-painel-adesivo-feijoada.jpg';
 
 export default Factory.extend({
+  active: true,
   _id() {
     return faker.random.uuid();
   },
-  active: true,
   title() {
     return faker.lorem.words(randomNumber({ min: 1, max: 3 }));
   },
@@ -28,6 +28,7 @@ export default Factory.extend({
   additional() {
     const length = randomNumber({ min: 0, max: 6 });
     const mapFn = () => ({
+      _id: faker.random.uuid(),
       label: faker.lorem.words(randomNumber({ min: 1, max: 3 })),
       price: faker.random
         .number({ min: 1, max: 6, precision: 0.99 })
@@ -39,6 +40,7 @@ export default Factory.extend({
   ingredients() {
     const length = randomNumber({ min: 2, max: 6 });
     const mapFn = () => ({
+      _id: faker.random.uuid(),
       label: faker.lorem.words(randomNumber({ min: 1, max: 3 })),
       required: Boolean(randomNumber({ min: 0, max: 1 })),
     });
