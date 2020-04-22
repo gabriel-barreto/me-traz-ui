@@ -11,6 +11,13 @@ import ItemsGroup from './ItemsGroup';
 import IngredientItem from './IngredientItem';
 import * as S from './styled';
 
+const INITIAL_STATE = {
+  ingredients: [],
+  qtt: 1,
+  total: 0,
+  addedAdditional: [],
+};
+
 function ProductModal({
   _id,
   additional,
@@ -23,12 +30,7 @@ function ProductModal({
   updateMode,
   visible,
 }) {
-  const [state, setState] = useState({
-    ingredients: [],
-    qtt: 1,
-    total: price,
-    addedAdditional: [],
-  });
+  const [state, setState] = useState({ ...INITIAL_STATE });
   const modalDialogRef = useRef();
   const { cart, setCart } = useCart();
 
@@ -89,6 +91,8 @@ function ProductModal({
       ...prev,
       items: [...prev.items, buildCartPayload()],
     }));
+
+    setState({ ...INITIAL_STATE });
     return onClose();
   }
 
@@ -112,6 +116,7 @@ function ProductModal({
 
   useEffect(() => {
     modalDialogRef.current.scrollTo({ top: 0, behavior: 'smooth' });
+    setState((prev) => ({ ...prev, total: price, addedAdditional: [] }));
   }, [title]);
 
   return (
@@ -131,12 +136,11 @@ function ProductModal({
         </S.ModalDialogHeader>
         <S.ModalDialogBody>
           <ItemsGroup title="Ingredients">
-            {ingredients.map(({ label, required, selected }, i) => (
+            {ingredients.map(({ label, required }) => (
               <IngredientItem
-                key={i}
+                key={label}
                 label={label}
                 locked={required}
-                state={selected}
                 onClick={onIngredientToggle}
               />
             ))}
