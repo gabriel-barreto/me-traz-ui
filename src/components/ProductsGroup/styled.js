@@ -56,19 +56,24 @@ export const ProductsGroupHeader = styled.div`
 `;
 
 export const ProductsGroupBody = styled.div`
-  display: grid;
-  grid-gap: 3.2rem;
-  grid-template-columns: repeat(1, 1fr);
-  width: fit-content;
+  column-count: 1;
+  column-gap: 4.8rem;
+
+  > div {
+    break-inside: avoid;
+    &:not(:last-of-type) {
+      margin: 0 0 2.4rem 0;
+    }
+  }
 
   @media screen and (min-width: ${breakpoint('sm')}) {
-    grid-template-columns: repeat(2, 1fr);
+    column-count: 2;
   }
   @media screen and (min-width: ${breakpoint('md')}) {
-    grid-template-columns: repeat(3, 1fr);
+    column-count: 3;
   }
   @media screen and (min-width: ${breakpoint('xl')}) {
-    grid-template-columns: repeat(4, 1fr);
+    column-count: 4;
   }
 `;
 
