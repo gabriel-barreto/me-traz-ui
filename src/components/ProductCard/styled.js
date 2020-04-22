@@ -5,18 +5,15 @@ const cardRadius = '8px';
 export const ProductCardPhoto = styled.div`
   border-radius: ${cardRadius} ${cardRadius} 0 0;
   background-color: ${({ theme }) => theme.hexColors.lightest};
-  background-image: ${(props) =>
-    props.src ? `url(${props.src})` : props.theme.seamlessPattern};
-  background-position: ${(props) => (props.src ? 'center' : 'center bottom')};
-  background-repeat: ${(props) => (props.src ? 'no-repeat' : 'repeat')};
-  background-size: ${(props) => (props.src ? 'cover' : 'initial')};
+  background-image: ${({ src }) => `url(${src})`};
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
   box-shadow: ${(props) =>
     props.src
       ? `0 1px 2px ${({ theme }) => theme.chromaColors.darkest.alpha(0.24)}`
       : 'none'};
   height: 32rem;
-  object-fit: cover;
-  object-position: center;
   width: 100%;
 `;
 
@@ -44,26 +41,34 @@ export const ProductCardValue = styled.p`
 `;
 
 const addToCardButtonSize = '64px';
-const addToCardIconSize = '32px';
 export const ProductCardAddToCardButton = styled.button`
   align-items: center;
   background-color: ${({ theme }) => theme.hexColors.darkest};
-  border: none;
   border-radius: 50%;
-  box-shadow: 0 2px 4px ${({ theme }) => theme.chromaColors.darkest.alpha(0.24)};
+  border: 2px solid transparent;
+  color: ${({ theme }) => theme.hexColors.lightest};
   display: flex;
-  bottom: -32px;
+  fill: ${({ theme }) => theme.hexColors.lightest};
   height: ${addToCardButtonSize};
   justify-content: center;
+  margin: -32px 0 0 0;
   outline-color: transparent;
-  position: absolute;
-  right: 0;
+  transition-duration: 400ms;
+  transition-property: background-color, border-color, fill, opacity, transform,
+    visibility;
   width: ${addToCardButtonSize};
-  > svg {
+  will-change: background-color, border-color, fill, opacity, transform,
+    visibility;
+
+  &:hover {
+    background-color: ${({ theme }) => theme.hexColors.primaryDark};
+    border-color: ${({ theme }) => theme.chromaColors.darkest.alpha(0.1)};
     color: ${({ theme }) => theme.hexColors.lightest};
     fill: ${({ theme }) => theme.hexColors.lightest};
-    height: ${addToCardIconSize};
-    width: ${addToCardIconSize};
+  }
+
+  &:active {
+    transform: scale(0.88);
   }
 `;
 
@@ -78,6 +83,8 @@ export const ProductCardPrice = styled.div`
 `;
 
 export const ProductCardBody = styled.div`
+  background-color: ${({ theme }) => theme.hexColors.lightest};
+  border-radius: 4px;
   padding: 3.2rem;
 
   > ${ProductCardTitle}, > ${ProductCardDescription} {
@@ -85,39 +92,37 @@ export const ProductCardBody = styled.div`
   }
 `;
 
-export const ProductCardContainer = styled.section``;
-
-export const ProductCardWrapper = styled.div`
-  background-color: ${({ theme }) => theme.hexColors.lightest};
-  border-radius: ${cardRadius};
-  box-shadow: 1px 2px 4px
-    ${({ theme }) => theme.chromaColors.darkest.alpha(0.32)};
-  cursor: pointer;
-  position: relative;
-  margin: 0 0 3.2rem 0;
-  user-select: none;
-
-  &,
-  ${ProductCardAddToCardButton} {
-    transform-origin: center;
-    transition: box-shadow 400ms, transform 400ms;
-    will-change: box-shadow, transfrom;
-  }
+export const ProductCardContainer = styled.section`
+  transition: transform 400ms;
+  width: 100%;
+  will-change: transform;
 
   &:hover {
-    &,
-    ${ProductCardAddToCardButton} {
-      transform: scale(1.008);
-      box-shadow: 4px 4px 8px
-        ${({ theme }) => theme.chromaColors.darkest.alpha(0.4)};
+    transform: translateY(-8px);
+    ~ ${ProductCardAddToCardButton} {
+      opacity: 0;
+      visibility: hidden;
     }
+  }
+`;
+
+export const ProductCardWrapper = styled.div`
+  align-items: flex-end;
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  user-select: none;
+
+  ${ProductCardContainer} {
+    transform-origin: center;
+    transition: transform 400ms;
+    will-change: transfrom;
   }
 
   &:active {
-    &,
+    ${ProductCardContainer},
     ${ProductCardAddToCardButton} {
-      box-shadow: 1px 2px 4px
-        ${({ theme }) => theme.chromaColors.darkest.alpha(0)};
       transform: scale(0.96);
     }
   }
