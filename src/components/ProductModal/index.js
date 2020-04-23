@@ -66,13 +66,13 @@ function ProductModal({
     const foundIndex = addedAdditional.findIndex(
       ({ id: currItemId }) => currItemId === itemId,
     );
-    const { item, price: itemPrice } = additional.find(
+    const { label: item, price: itemPrice } = additional.find(
       ({ _id: currItemId }) => currItemId === itemId,
     );
 
     if (foundIndex > -1)
-      addedAdditional.splice(foundIndex, 1, { item, itemPrice, qtt });
-    else addedAdditional.push({ item, itemPrice, qtt });
+      addedAdditional.splice(foundIndex, 1, { _id, item, itemPrice, qtt });
+    else addedAdditional.push({ _id, item, itemPrice, qtt });
 
     setState((prev) => ({
       ...prev,
