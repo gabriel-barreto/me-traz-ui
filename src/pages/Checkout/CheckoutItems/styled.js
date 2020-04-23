@@ -5,7 +5,7 @@ import { breakpoint } from '../../../styles';
 export const CheckoutItemsWrapper = styled.div`
   @media screen and (min-width: ${breakpoint('md')}) {
     margin: 0 0 0 auto;
-    max-width: 40rem;
+    width: 40rem;
   }
 `;
 
