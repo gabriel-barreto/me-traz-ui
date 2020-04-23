@@ -1,15 +1,6 @@
 import styled from 'styled-components';
 
-export const InputWrapper = styled.div`
-  display: flex;
-  flex-direction: column;
-`;
-
-export const InputLabel = styled.label`
-  color: ${({ theme }) => theme.hexColors.dark};
-  font-size: 1.6rem;
-  margin: 0 0 0.6rem 0;
-`;
+export * from '../InputUtils/styled';
 
 export const InputField = styled.input`
   background-color: ${({ theme }) => theme.hexColors.lightest};
@@ -18,5 +9,6 @@ export const InputField = styled.input`
   color: ${({ theme }) => theme.hexColors.dark};
   font-size: 1.6rem;
   min-height: 4.4rem;
+  outline-color: ${({ theme }) => theme.hexColors.primary};
   padding: 0 1.6rem 0 0.8rem;
 `;
