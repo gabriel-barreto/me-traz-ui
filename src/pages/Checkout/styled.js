@@ -2,22 +2,19 @@ import styled from 'styled-components';
 
 import { breakpoint } from '../../styles';
 
-export const CheckoutItemsWrapper = styled.div`
-  @media screen and (min-width: ${breakpoint('md')}) {
-    margin: 1.6rem 0 0 auto;
-    max-width: 40rem;
-  }
-`;
+export const CheckoutPageGrid = styled.div`
+  align-items: flex-start;
+  display: flex;
+  flex-direction: row;
+  margin: 1.6rem 0;
 
-export const CheckoutItemsTitle = styled.h2`
-  color: ${({ theme }) => theme.hexColors.lightest};
-  font-size: 2.4rem;
-  font-weight: 500;
-  margin: 0 0 3.2rem 0;
-
-  @media screen and (max-width: 1023px) {
+  > form {
     display: none;
   }
-`;
 
-export const CheckoutItemsList = styled.ul``;
+  @media screen and (min-width: ${breakpoint('md')}) {
+    > form {
+      display: block;
+    }
+  }
+`;

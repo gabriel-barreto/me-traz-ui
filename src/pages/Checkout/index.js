@@ -4,7 +4,10 @@ import { useHistory } from 'react-router-dom';
 import { Layout } from '../../components';
 import { useCart } from '../../contexts';
 
+import CheckoutForm from './CheckoutForm';
 import CheckoutItems from './CheckoutItems';
+
+import * as S from './styled';
 
 const INITIAL_STATE = { index: -1, payload: {} };
 
@@ -36,11 +39,14 @@ function CheckoutPage() {
 
   return (
     <Layout>
-      <CheckoutItems
-        items={cart.items}
-        onEdit={onItemEditHandler}
-        onRemove={onItemRemoveHandler}
-      />
+      <S.CheckoutPageGrid>
+        <CheckoutForm />
+        <CheckoutItems
+          items={cart.items}
+          onEdit={onItemEditHandler}
+          onRemove={onItemRemoveHandler}
+        />
+      </S.CheckoutPageGrid>
     </Layout>
   );
 }
