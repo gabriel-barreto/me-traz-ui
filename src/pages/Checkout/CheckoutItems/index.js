@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 import CheckoutItem from '../CheckoutItem';
 import EmptyCheckoutMessage from '../EmptyMessage';
 
-import * as S from '../styled';
+import * as S from './styled';
 
 function CheckoutItems({ items, onEdit, onRemove }) {
   return (
