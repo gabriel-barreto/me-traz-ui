@@ -47,21 +47,23 @@ function Navbar() {
         <S.NavBrand src={brand} tilte="Me Traz" alt="Me Traz" />
       </S.NavBrandWrapper>
 
-      <S.NavSearchFormContainer
-        className={`${state.searchFormVisible ? '--visible' : ''}`}
-      >
-        <SearchForm />
-      </S.NavSearchFormContainer>
-
       <S.NavActions>
         {!pathname.includes('sacola') ? (
-          <S.NavSearchFormToggler
-            alt={searchTogglerTitle}
-            title={searchTogglerTitle}
-            onClick={toggleSearchForm}
-          >
-            <SearchActionIcon isVisible={state.searchFormVisible} />
-          </S.NavSearchFormToggler>
+          <>
+            <S.NavSearchFormContainer
+              className={`${state.searchFormVisible ? '--visible' : ''}`}
+            >
+              <SearchForm />
+            </S.NavSearchFormContainer>
+
+            <S.NavSearchFormToggler
+              alt={searchTogglerTitle}
+              title={searchTogglerTitle}
+              onClick={toggleSearchForm}
+            >
+              <SearchActionIcon isVisible={state.searchFormVisible} />
+            </S.NavSearchFormToggler>
+          </>
         ) : null}
 
         <S.NavChatLink
