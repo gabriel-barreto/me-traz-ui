@@ -3,18 +3,20 @@ import styled from 'styled-components';
 import { breakpoint } from '../../styles';
 
 export const CheckoutPageGrid = styled.div`
-  align-items: flex-start;
   display: flex;
-  flex-direction: row;
-  margin: 1.6rem 0;
+  flex-direction: column-reverse;
 
-  > form {
-    display: none;
+  > *:first-of-type {
+    margin: 4rem 0 0 0;
   }
 
   @media screen and (min-width: ${breakpoint('md')}) {
-    > form {
-      display: block;
+    align-items: flex-start;
+    flex-direction: row;
+    margin: 1.6rem 0;
+
+    > *:first-of-type {
+      margin: 0 4rem 0 0;
     }
   }
 `;
