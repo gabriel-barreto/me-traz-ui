@@ -1,37 +1,30 @@
 import styled from 'styled-components';
 
+import { Price } from '../../../components';
+
+export const CheckoutItemQtt = styled.p`
+  font-size: 1.2rem;
+  margin: 0 0.32rem 0 0;
+  text-align: center;
+  vertical-align: middle;
+`;
+
+export const CheckoutItemPrice = styled(Price)`
+  margin: 0 0 0 auto;
+`;
+
 export const CheckoutItemTitle = styled.p`
   color: ${({ theme }) => theme.hexColors.lightest};
   font-size: 1.8rem;
 `;
 
-export const CheckoutItemPriceCurrency = styled.p``;
-
-export const CheckoutItemPriceValue = styled.p`
-  font-weight: 500;
-`;
-
-export const CheckoutItemPrice = styled.span`
-  color: ${({ theme }) => theme.hexColors.lightest};
+export const CheckoutItemTitleContainer = styled.div`
   align-items: center;
   display: flex;
-  justify-content: flex-end;
-
-  > ${CheckoutItemPriceCurrency} {
-    margin: 0 0.24rem 0 0;
-  }
-`;
-
-export const CheckoutItemTitleContainer = styled.div`
   margin: 0 0 1rem 0;
 
-  > ${CheckoutItemPrice} {
-    > ${CheckoutItemPriceCurrency} {
-      font-size: 1.2rem;
-    }
-    > ${CheckoutItemPriceValue} {
-      font-size: 1.6rem;
-    }
+  > ${CheckoutItemTitle} {
+    margin: 0 0.4rem 0 0;
   }
 `;
 
@@ -41,15 +34,12 @@ export const CheckoutItemObsLabel = styled.p`
 `;
 
 export const CheckoutItemObsItem = styled.li`
+  align-items: center;
+  display: flex;
   margin: 0.48rem 0;
-  > ${CheckoutItemPrice} {
-    > ${CheckoutItemPriceCurrency} {
-      margin: 0 0.32rem 0 0;
-      font-size: 1.2rem;
-    }
-    > ${CheckoutItemPriceValue} {
-      font-size: 1.4rem;
-    }
+
+  > ${CheckoutItemPrice} > p:last-of-type {
+    font-size: 1.4rem;
   }
 `;
 
@@ -61,7 +51,11 @@ export const CheckoutItemTotalLabel = styled.p`
   font-size: 1.6rem;
 `;
 
-export const CheckoutItemTotalContainer = styled.div``;
+export const CheckoutItemTotalContainer = styled.div`
+  align-items: center;
+  display: flex;
+  justify-content: space-between;
+`;
 
 export const CheckoutItemAction = styled.button`
   background-color: transparent;
@@ -96,13 +90,5 @@ export const CheckoutItemWrapper = styled.li`
 
   &:not(:last-of-type) {
     margin: 0 0 4rem 0;
-  }
-
-  > ${CheckoutItemTitleContainer},
-    > ${CheckoutItemTotalContainer},
-    ${CheckoutItemObsItem} {
-    align-items: center;
-    display: flex;
-    justify-content: space-between;
   }
 `;
