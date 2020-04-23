@@ -1,10 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import { $PriceFormatter } from '../../../utils';
-
 import * as S from '../CheckoutItem/styled';
-// import * as S from './styled';
 
 function CheckoutItemAdditional({ additional }) {
   const list = additional
@@ -12,20 +9,16 @@ function CheckoutItemAdditional({ additional }) {
     .map(({ itemPrice, qtt, ...rest }) => ({
       ...rest,
       qtt,
-      itemPrice: $PriceFormatter.fancy(qtt * itemPrice),
+      itemPrice: qtt * itemPrice,
     }));
 
   return list.length > 0 ? (
     <S.CheckoutItemObs>
       {list.map(({ _id, item, itemPrice, qtt }) => (
         <S.CheckoutItemObsItem key={_id}>
-          <S.CheckoutItemObsLabel>
-            {qtt}x {item}
-          </S.CheckoutItemObsLabel>
-          <S.CheckoutItemPrice>
-            <S.CheckoutItemPriceCurrency>+ R$</S.CheckoutItemPriceCurrency>
-            <S.CheckoutItemPriceValue>{itemPrice}</S.CheckoutItemPriceValue>
-          </S.CheckoutItemPrice>
+          <S.CheckoutItemQtt>{qtt}x</S.CheckoutItemQtt>
+          <S.CheckoutItemObsLabel>{item}</S.CheckoutItemObsLabel>
+          <S.CheckoutItemPrice prefix="+" value={itemPrice} />
         </S.CheckoutItemObsItem>
       ))}
     </S.CheckoutItemObs>
