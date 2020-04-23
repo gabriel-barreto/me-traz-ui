@@ -5,6 +5,7 @@ import * as S from './styled';
 
 function Input({
   className,
+  helper,
   label,
   name,
   onChange,
@@ -15,6 +16,7 @@ function Input({
   return (
     <S.InputWrapper className={className}>
       <S.InputLabel htmlFor={name}>{label}</S.InputLabel>
+      {helper && <S.InputHelper>{helper}</S.InputHelper>}
       <S.InputField
         id={name}
         name={name}
@@ -27,9 +29,10 @@ function Input({
   );
 }
 
-Input.defaultProps = { className: '', type: 'text' };
+Input.defaultProps = { className: '', helper: '', type: 'text' };
 Input.propTypes = {
   className: PropTypes.string,
+  helper: PropTypes.string,
   label: PropTypes.string.isRequired,
   name: PropTypes.string.isRequired,
   placeholder: PropTypes.string.isRequired,
