@@ -1,19 +1,23 @@
 import React, { useState } from 'react';
 
-import { Input } from '../../../components';
-
+import { steps } from './content';
 import * as S from './styled';
 
-const steps = {
-  1: 'one',
-  2: 'two',
-  3: 'three',
-};
 function CheckoutForm() {
-  const [active, setActive] = useState('--one');
+  const [active, setActive] = useState(steps[1]);
+  const [, setPayload] = useState({});
 
-  function onActiveChange(targetClass) {
-    setActive(`--${targetClass}`);
+  function onActiveChange(activeForm) {
+    setActive(activeForm);
+  }
+
+  function onChangeHandler({ target }) {
+    const { name, value } = target;
+    return setPayload((prev) => ({ ...prev, [name]: value }));
+  }
+
+  function onSubmitHandler(e) {
+    e.preventDefault();
   }
 
   return (
@@ -27,16 +31,10 @@ function CheckoutForm() {
             {key}
           </S.CheckoutFormStep>
         ))}
-        <S.CheckoutFormIndicator className={active} />
+        <S.CheckoutFormIndicator className={`--${active.targetClass}`} />
       </S.CheckoutFormSteps>
-      <S.CheckoutFormContainer method="POST">
-        <Input
-          type="text"
-          name="name"
-          label="Nome:*"
-          placeholder="Exemplo: Lorem Ipsum"
-          onChange={() => {}}
-        />
+      <S.CheckoutFormContainer method="POST" onSubmit={onSubmitHandler}>
+        <active.component onChange={onChangeHandler} />
       </S.CheckoutFormContainer>
     </S.CheckoutFormWrapper>
   );

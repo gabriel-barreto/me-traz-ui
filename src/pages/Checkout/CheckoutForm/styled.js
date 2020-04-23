@@ -10,9 +10,12 @@ export const CheckoutFormWrapper = styled.div`
   display: flex;
   flex-direction: column;
   margin: 0 3.2rem 0 0;
+  transition: height 400ms;
   width: 100%;
+  will-change: height;
 
   @media screen and (min-width: ${breakpoint('sm')}) {
+    align-items: stretch;
     flex-direction: row;
   }
 `;
@@ -25,21 +28,19 @@ export const CheckoutFormSteps = styled.div`
   border-right: none;
   display: flex;
   flex-direction: row;
-  height: 100%;
   justify-content: space-around;
-  min-height: 0;
   overflow-y: hidden;
   padding: 3.2rem 0;
   position: relative;
+  transition: height 400ms;
   width: 100%;
+  will-change: height;
 
   @media screen and (min-width: ${breakpoint('sm')}) {
     border-right: 1px solid
       ${({ theme }) => theme.chromaColors.darkest.alpha(0.08)};
     border-bottom: none;
     flex-direction: column;
-    height: fit-content;
-    min-height: 32rem;
     padding: 0 3.2rem;
     width: fit-content;
   }
