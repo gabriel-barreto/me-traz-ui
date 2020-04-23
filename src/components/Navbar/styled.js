@@ -97,7 +97,6 @@ export const Navbar = styled.nav`
     padding: 2.4rem 6.4rem;
   }
   @media screen and (min-width: ${breakpoint('lg')}) {
-    justify-content: flex-start;
     padding: 2.4rem 12.8rem;
   }
 `;
@@ -106,6 +105,7 @@ export const NavActions = styled.div`
   align-items: center;
   display: flex;
   justify-content: flex-end;
+  width: 100%;
 `;
 
 export const NavSearchFormToggler = styled.button`
