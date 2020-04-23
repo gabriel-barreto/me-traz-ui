@@ -4,9 +4,7 @@ import { useHistory } from 'react-router-dom';
 import { Layout } from '../../components';
 import { useCart } from '../../contexts';
 
-import CheckoutItem from './CheckoutItem';
-import EmptyCheckoutMessage from './EmptyMessage';
-import * as S from './styled';
+import CheckoutItems from './CheckoutItems';
 
 const INITIAL_STATE = { index: -1, payload: {} };
 
@@ -38,23 +36,11 @@ function CheckoutPage() {
 
   return (
     <Layout>
-      <S.CheckoutItemsWrapper>
-        <S.CheckoutItemsTitle>Sua Sacola</S.CheckoutItemsTitle>
-        {cart.items.length ? (
-          <S.CheckoutItemsList>
-            {cart.items.map((each) => (
-              <CheckoutItem
-                key={each._id}
-                {...each}
-                onEdit={() => onItemEditHandler(each._id)}
-                onRemove={() => onItemRemoveHandler(each._id)}
-              />
-            ))}
-          </S.CheckoutItemsList>
-        ) : (
-          <EmptyCheckoutMessage />
-        )}
-      </S.CheckoutItemsWrapper>
+      <CheckoutItems
+        items={cart.items}
+        onEdit={onItemEditHandler}
+        onRemove={onItemRemoveHandler}
+      />
     </Layout>
   );
 }
