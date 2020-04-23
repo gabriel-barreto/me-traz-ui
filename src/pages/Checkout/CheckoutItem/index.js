@@ -2,7 +2,6 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 import { Edit, Trash } from '../../../styles/icons.styles';
-import { $PriceFormatter } from '../../../utils';
 
 import Additional from '../Additional';
 import Ingredients from '../Ingredients';
@@ -14,19 +13,16 @@ function CheckoutItem({
   ingredients,
   onEdit,
   onRemove,
-  title,
   price,
+  title,
+  qtt,
 }) {
-  const fancyPrice = $PriceFormatter.fancy(price);
-
   return (
     <S.CheckoutItemWrapper>
       <S.CheckoutItemTitleContainer>
+        <S.CheckoutItemQtt>{qtt}x</S.CheckoutItemQtt>
         <S.CheckoutItemTitle>{title}</S.CheckoutItemTitle>
-        <S.CheckoutItemPrice>
-          <S.CheckoutItemPriceCurrency>R$</S.CheckoutItemPriceCurrency>
-          <S.CheckoutItemPriceValue>{fancyPrice}</S.CheckoutItemPriceValue>
-        </S.CheckoutItemPrice>
+        <S.CheckoutItemPrice value={price} />
       </S.CheckoutItemTitleContainer>
       <Ingredients ingredients={ingredients} />
       <Additional additional={addedAdditional} />
@@ -46,10 +42,11 @@ CheckoutItem.defaultProps = { addedAdditional: [], ingredients: [] };
 CheckoutItem.propTypes = {
   addedAdditional: Additional.propTypes.additional,
   ingredients: Ingredients.propTypes.ingredients,
-  title: PropTypes.string.isRequired,
   onEdit: PropTypes.func.isRequired,
   onRemove: PropTypes.func.isRequired,
   price: PropTypes.oneOfType([PropTypes.string, PropTypes.number]).isRequired,
+  title: PropTypes.string.isRequired,
+  qtt: PropTypes.number.isRequired,
 };
 
 export default CheckoutItem;
