@@ -1,3 +1,4 @@
+export { default as Dropdown } from './Dropdown';
 export { default as Input } from './Input';
 export { default as Layout } from './Layout';
 export { default as Options } from './Options';
