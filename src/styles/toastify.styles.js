@@ -9,6 +9,8 @@ export default css`
 
   .Toastify__toast-body {
     font-size: 1.6rem;
+    line-height: 144%;
+    padding: 0.8rem 1.6rem;
   }
 
   .Toastify__toast--success {
