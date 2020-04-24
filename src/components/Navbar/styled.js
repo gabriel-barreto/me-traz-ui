@@ -69,6 +69,7 @@ export const NavSearchFormContainer = styled.div`
     padding: 0 4rem;
     position: relative;
     top: auto;
+    z-index: 9;
 
     ${NavSearchFormVisible};
   }
