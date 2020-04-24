@@ -28,13 +28,22 @@ const fields = [
   },
 ];
 
-function UserCheckoutForm({ onChange }) {
+function UserCheckoutForm({ onChange, onPrev, onNext }) {
   return (
     <>
       <S.FormTitle>Te conheço?</S.FormTitle>
       {fields.map((each) => (
         <S.FormInput {...each} key={each.name} onChange={onChange} />
       ))}
+      <S.FormActions>
+        <S.FormSecondaryAction type="button" onClick={onPrev}>
+          Voltar
+        </S.FormSecondaryAction>
+        <S.FormSubmitAction type="button" onClick={onNext}>
+          Próximo
+        </S.FormSubmitAction>
+        <S.FormActionsLegend>* Campos Requeridos</S.FormActionsLegend>
+      </S.FormActions>
     </>
   );
 }
