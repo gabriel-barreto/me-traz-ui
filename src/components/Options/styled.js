@@ -71,7 +71,7 @@ export const OptionsChooses = styled.div`
 
   > ${OptionsChoose} {
     &:not(:last-of-type) {
-      margin: 0 1.6rem 0 0;
+      margin: 0 2.4rem 0 0;
     }
   }
 `;
