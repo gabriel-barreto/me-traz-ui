@@ -5,10 +5,10 @@ import { useCart } from '../../contexts';
 
 import { Close } from '../../styles/icons.styles';
 
-import AdditionalItem from './AdditionalItem';
+import Additional from './Additional';
 import AddToCartForm from './AddToCardForm';
-import ItemsGroup from './ItemsGroup';
-import IngredientItem from './IngredientItem';
+import Ingredients from './Ingredients';
+
 import * as S from './styled';
 
 const INITIAL_STATE = {
@@ -64,15 +64,15 @@ function ProductModal({
     const { addedAdditional } = state;
 
     const foundIndex = addedAdditional.findIndex(
-      ({ id: currItemId }) => currItemId === itemId,
+      ({ _id: currItemId }) => currItemId === itemId,
     );
     const { label: item, price: itemPrice } = additional.find(
       ({ _id: currItemId }) => currItemId === itemId,
     );
 
-    if (foundIndex > -1)
-      addedAdditional.splice(foundIndex, 1, { _id, item, itemPrice, qtt });
-    else addedAdditional.push({ _id, item, itemPrice, qtt });
+    const payload = { _id: itemId, item, itemPrice, qtt };
+    if (foundIndex > -1) addedAdditional.splice(foundIndex, 1, payload);
+    else addedAdditional.push(payload);
 
     setState((prev) => ({
       ...prev,
@@ -120,6 +120,7 @@ function ProductModal({
     modalDialogRef.current.scrollTo({ top: 0, behavior: 'smooth' });
     setState((prev) => ({
       ...prev,
+      total: price,
       addedAdditional: [],
       ingredients: [],
     }));
@@ -141,28 +142,11 @@ function ProductModal({
           </S.ModalCloseButton>
         </S.ModalDialogHeader>
         <S.ModalDialogBody>
-          <ItemsGroup title="Ingredients">
-            {ingredients.map(({ _id: itemId, label, required }) => (
-              <IngredientItem
-                _id={itemId}
-                key={itemId}
-                label={label}
-                locked={required}
-                onClick={onIngredientToggle}
-              />
-            ))}
-          </ItemsGroup>
-          <ItemsGroup title="Bora turbinar esse pedido?">
-            {additional.map(({ _id: itemId, label, price: itemPrice }) => (
-              <AdditionalItem
-                _id={itemId}
-                key={itemId}
-                label={label}
-                price={itemPrice}
-                onChange={onAdditionalChanges}
-              />
-            ))}
-          </ItemsGroup>
+          <Ingredients
+            ingredients={ingredients}
+            onChange={onIngredientToggle}
+          />
+          <Additional additional={additional} onChange={onAdditionalChanges} />
         </S.ModalDialogBody>
         <S.ModalDialogFooter>
           <AddToCartForm

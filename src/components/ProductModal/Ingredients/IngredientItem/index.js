@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 
-import { Check } from '../../../styles/icons.styles';
+import { Check } from '../../../../styles/icons.styles';
 
 import * as S from './styled';
 

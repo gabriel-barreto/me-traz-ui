@@ -3,10 +3,11 @@ import PropTypes from 'prop-types';
 
 import * as S from './styled';
 
-import SpinInput from '../../SpinInput';
+import SpinInput from '../../../SpinInput';
 
 function AdditionalItem({ _id, label, min, max, onChange, price }) {
   function onQttChangeHandler(qtt) {
+    console.log(_id);
     return onChange({ _id, qtt });
   }
 
