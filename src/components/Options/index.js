@@ -3,18 +3,16 @@ import PropTypes from 'prop-types';
 
 import * as S from './styled';
 
-function Options({ className, chooses, helper, label, onChange }) {
+function Options({ className, chooses, helper, label, name, onChange }) {
   const [selected, setSelected] = useState('');
 
   function onChoose(newValue) {
-    console.log(newValue);
-
     if (newValue === selected) return setSelected('');
     return setSelected(newValue);
   }
 
   useEffect(() => {
-    onChange({ target: { name: 'option', value: selected } });
+    onChange({ target: { name, value: selected } });
   }, [selected]);
 
   return (
@@ -45,6 +43,7 @@ Options.propTypes = {
   ).isRequired,
   helper: PropTypes.string,
   label: PropTypes.string.isRequired,
+  name: PropTypes.string.isRequired,
   onChange: PropTypes.func.isRequired,
 };
 
