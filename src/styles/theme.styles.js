@@ -1,7 +1,7 @@
 import chroma from 'chroma-js';
 
 const chromaColors = {
-  primary: chroma('#93bb54'),
+  primary: chroma('#93BB54'),
   primaryDark: chroma('#799A45'),
 
   dark: chroma('#333333'),
