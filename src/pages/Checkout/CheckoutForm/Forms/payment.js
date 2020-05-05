@@ -1,12 +1,13 @@
-import React from 'react';
+import React, { useState } from 'react';
 
-import { Dropdown } from '../../../../components';
 import * as S from './styled';
 
 import formPropTypes from './formType';
 
 function PaymentCheckoutForm({ onChange, onPrev }) {
+  const [paymentType, setPaymentType] = useState('');
   const options = [
+    { label: 'Dinheiro', value: 'Dinheiro' },
     { label: 'Cartão Crédito Visa', value: 'Cartão Crédito Visa' },
     { label: 'Cartão Débito Visa', value: 'Cartão Débito Visa' },
     { label: 'Cartão Crédito Mastercard', value: 'Cartão Crédito Mastercard' },
@@ -16,24 +17,35 @@ function PaymentCheckoutForm({ onChange, onPrev }) {
     { label: 'Vale Alimentação', value: 'Vale Alimentação' },
     { label: 'Vale Refeição', value: 'Vale Refeição' },
   ];
+
+  function onPaymentTypeSelect({ target }) {
+    const { value } = target;
+    setPaymentType(value);
+    return onChange({ target });
+  }
+
   return (
     <>
       <S.FormTitle>E sobre o pagamento?</S.FormTitle>
-      <Dropdown
+      <S.FormDropdown
         label="Forma de pagamento*:"
         name="paymentMethod"
         placeholder="Selecione..."
         options={options}
-        onChange={onChange}
+        onChange={onPaymentTypeSelect}
       />
-      <S.FormInput
-        helper="Informe apenas os números"
-        label="Precisa de troco?*"
-        name="paymentChang"
-        placeholder="Exemplo: 50"
-        type="number"
-        onChange={onChange}
-      />
+
+      {paymentType === 'Dinheiro' ? (
+        <S.FormInput
+          helper="Informe apenas os números"
+          label="Precisa de troco?"
+          name="paymentChang"
+          placeholder="Exemplo: 50.50"
+          type="number"
+          onChange={onChange}
+        />
+      ) : null}
+
       <S.FormActions>
         <S.FormSecondaryAction onClick={onPrev}>Voltar</S.FormSecondaryAction>
         <S.FormSubmitAction type="submit">Enviar Pedido</S.FormSubmitAction>
