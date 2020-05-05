@@ -10,6 +10,7 @@ export const InputHelper = styled.p`
   color: ${({ theme }) => theme.chromaColors.darkest.alpha(0.56)};
   font-size: 1.4rem;
   font-weight: 300;
+  line-height: 128%;
   margin: 0 0 0.8rem 0;
 
   ~ ${InputLabel} {
