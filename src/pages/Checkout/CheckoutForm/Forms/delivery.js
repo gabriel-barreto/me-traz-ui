@@ -50,6 +50,27 @@ function DeliveryCheckoutForm({ onChange, onNext }) {
         </>
       ) : null}
 
+      {state === 'withdraw' ? (
+        <S.FormInfo>
+          <S.FormInfoTitle>Informações para retirada</S.FormInfoTitle>
+          <S.FormInfoProp>
+            <S.FormInfoPropLabel>Local:</S.FormInfoPropLabel>
+            <S.FormInfoPropValue>
+              R. Padre Albuquerque, 1111 - 1º Andar - Centro, Itapetininga - SP,
+              18200-075
+            </S.FormInfoPropValue>
+          </S.FormInfoProp>
+          <S.FormInfoProp>
+            <S.FormInfoPropLabel>Telefone:</S.FormInfoPropLabel>
+            <S.FormInfoPropValue>(15) 3527-0139</S.FormInfoPropValue>
+          </S.FormInfoProp>
+          <S.FormInfoProp>
+            <S.FormInfoPropLabel>Tempo médio de espera:</S.FormInfoPropLabel>
+            <S.FormInfoPropValue>30 à 45 minutos</S.FormInfoPropValue>
+          </S.FormInfoProp>
+        </S.FormInfo>
+      ) : null}
+
       <S.FormActions>
         <S.FormSubmitAction onClick={onNext}>Próximo</S.FormSubmitAction>
         <S.FormActionsLegend>* Campos Requeridos</S.FormActionsLegend>
