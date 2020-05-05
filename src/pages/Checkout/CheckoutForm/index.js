@@ -6,10 +6,19 @@ import * as S from './styled';
 
 function CheckoutForm() {
   const [active, setActive] = useState(steps[1]);
-  const [payload, setPayload] = useState({});
+  const [payload, setPayload] = useState({ deliveryType: '' });
 
   function onActiveChange(activeForm) {
     setActive(activeForm);
+  }
+
+  function isDeliveryValuesIncomplete() {
+    if (payload.deliveryType === 'withdraw') return false;
+
+    const requiredProps = ['cep', 'number'];
+    return requiredProps
+      .map((key) => Object.keys(payload).includes(key) && payload[key])
+      .includes(false);
   }
 
   function onFormChange(type = 'next') {
@@ -19,7 +28,7 @@ function CheckoutForm() {
         .map((key) => payloadKeys.includes(key) && payload[key])
         .includes(false);
 
-      if (hasAbsentProp) {
+      if (hasAbsentProp || isDeliveryValuesIncomplete()) {
         toast.error('Você ainda não completou esta etapa!');
         return;
       }
