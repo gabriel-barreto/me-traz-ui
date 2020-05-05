@@ -16,13 +16,10 @@ function Dropdown({
     <S.InputWrapper className={className}>
       <S.InputLabel>{label}</S.InputLabel>
       <S.InputHelper>{helper}</S.InputHelper>
-      <S.DropdownField
-        defaultSelected=""
-        id={name}
-        name={name}
-        onChange={onChange}
-      >
-        <S.DropdownOption disabled>{placeholder}</S.DropdownOption>
+      <S.DropdownField id={name} name={name} value="" onChange={onChange}>
+        <S.DropdownOption value="" disabled>
+          {placeholder}
+        </S.DropdownOption>
         {options.map((each) => (
           <S.DropdownOption key={each.value} value={each.value}>
             {each.label}
