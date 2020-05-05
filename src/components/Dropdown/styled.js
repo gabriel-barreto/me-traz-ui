@@ -7,6 +7,7 @@ export const DropdownField = styled.select`
   border: 1px solid ${({ theme }) => theme.hexColors.light};
   font-size: 1.6rem;
   min-height: 4.4rem;
+  outline-color: ${({ theme }) => theme.hexColors.primary};
   padding: 0.8rem 1.6rem 0.8rem 0.8rem;
 `;
 
