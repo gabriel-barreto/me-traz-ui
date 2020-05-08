@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { toast } from 'react-toastify';
 
-import { steps } from './content';
+import { steps, maskedValues } from './content';
 import * as S from './styled';
 
 function CheckoutForm() {
@@ -38,6 +38,10 @@ function CheckoutForm() {
 
   function onChangeHandler({ target }) {
     const { name, value } = target;
+    if (Object.keys(maskedValues).includes(name)) {
+      const maskedValue = maskedValues[name](value);
+      Object.assign(target, { value: maskedValue });
+    }
 
     return setPayload((prev) => ({ ...prev, [name]: value }));
   }

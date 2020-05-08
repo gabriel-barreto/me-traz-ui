@@ -1,5 +1,7 @@
 import Forms from './Forms';
 
+import { $input } from '../../../utils';
+
 export const steps = {
   1: {
     targetClass: 'one',
@@ -21,4 +23,8 @@ export const steps = {
     prev: 2,
     requestedKeys: ['paymentType'],
   },
+};
+export const maskedValues = {
+  cep: $input.masks.cep,
+  whatsapp: $input.masks.phone,
 };
