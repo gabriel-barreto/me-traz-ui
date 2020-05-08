@@ -39,9 +39,9 @@ function PaymentCheckoutForm({ onChange, onPrev }) {
         <S.FormInput
           helper="Informe apenas os números"
           label="Precisa de troco?"
-          name="paymentChang"
+          name="paymentChange"
           placeholder="Exemplo: 50.50"
-          type="number"
+          type="text"
           onChange={onChange}
         />
       ) : null}
