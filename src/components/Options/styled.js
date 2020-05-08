@@ -8,6 +8,7 @@ const optionsChooseMark = css`
     border-radius: 2px;
     background-color: ${({ theme }) => theme.hexColors.light};
     box-shadow: 0 1px 2px ${({ theme }) => theme.chromaColors.dark.alpha(0.24)};
+    color: transparent;
     content: '✔';
     display: flex;
     font-size: 1.6rem;
@@ -31,6 +32,7 @@ const optionsChooseActive = css`
       &::before {
         background-color: ${({ theme }) => theme.hexColors.primaryDark};
         box-shadow: 0 1px 2px transparent;
+        color: ${({ theme }) => theme.chromaColors.darkest.alpha(0.32)};
       }
     }
   }
