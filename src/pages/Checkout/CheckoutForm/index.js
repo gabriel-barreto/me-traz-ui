@@ -1,38 +1,21 @@
 import React, { useState } from 'react';
-import { toast } from 'react-toastify';
 
-import { steps, maskedValues } from './content';
+import { steps, maskedValues, isFormValuesValid } from './content';
 import * as S from './styled';
 
 function CheckoutForm() {
   const [active, setActive] = useState(steps[1]);
   const [payload, setPayload] = useState({ deliveryType: '' });
 
-  function onActiveChange(activeForm) {
-    setActive(activeForm);
-  }
+  function onActiveChange(targetForm) {
+    const { id } = active;
+    if (targetForm.id > id && !isFormValuesValid(payload, active)) return;
 
-  function isDeliveryValuesIncomplete() {
-    if (payload.deliveryType === 'withdraw') return false;
-
-    const requiredProps = ['cep', 'number'];
-    return requiredProps
-      .map((key) => Object.keys(payload).includes(key) && payload[key])
-      .includes(false);
+    setActive(targetForm);
   }
 
   function onFormChange(type = 'next') {
-    if (type === 'next') {
-      const payloadKeys = Object.keys(payload);
-      const hasAbsentProp = active.requestedKeys
-        .map((key) => payloadKeys.includes(key) && payload[key])
-        .includes(false);
-
-      if (hasAbsentProp || isDeliveryValuesIncomplete()) {
-        toast.error('Você ainda não completou esta etapa!');
-        return;
-      }
-    }
+    if (type === 'next' && !isFormValuesValid(payload, active)) return;
     setActive(steps[active[type]]);
   }
 
