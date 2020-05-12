@@ -6,9 +6,12 @@ const headers = {
 };
 
 const config = {
-  development: { baseURL: 'api/', headers },
+  development: { baseURL: 'http://localhost:5000/api/', headers },
   test: { baseURL: 'api/', headers },
-  production: { baseURL: 'api/', headers },
+  production: {
+    baseURL: 'https://me-traz-demo-api.herokuapp.com/api/',
+    headers,
+  },
 };
 
 export default config[app.env];
