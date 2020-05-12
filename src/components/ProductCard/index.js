@@ -2,6 +2,7 @@ import PropTypes from 'prop-types';
 import React from 'react';
 
 import { ShoppingBag } from '../../styles/icons.styles';
+import { $PriceFormatter } from '../../utils';
 
 import * as S from './styled';
 
@@ -32,7 +33,7 @@ function ProductCard({
           <S.ProductCardPrice>
             <S.ProductCardCurrency>{currency}</S.ProductCardCurrency>
             <S.ProductCardValue>
-              {`${price}`.replace('.', ',')}
+              {$PriceFormatter.fancy(price)}
             </S.ProductCardValue>
           </S.ProductCardPrice>
         </S.ProductCardBody>
