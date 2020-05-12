@@ -9,9 +9,7 @@ import { app } from './config';
 
 import * as serviceWorker from './serviceWorker';
 
-if (app.env !== 'production') {
-  makeServer();
-}
+if (app.env === 'test') makeServer();
 
 ReactDOM.render(
   <React.StrictMode>
