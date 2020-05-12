@@ -1,9 +1,15 @@
 import React, { useState } from 'react';
 
+import { useCart } from '../../../contexts';
+import { $cart, $order } from '../../../services';
+
 import { steps, maskedValues, isFormValuesValid } from './content';
 import * as S from './styled';
 
 function CheckoutForm() {
+  const {
+    cart: { items: cartItems },
+  } = useCart();
   const [active, setActive] = useState(steps[1]);
   const [payload, setPayload] = useState({ deliveryType: '' });
 
@@ -31,7 +37,9 @@ function CheckoutForm() {
 
   function onSubmitHandler(e) {
     e.preventDefault();
-    console.log(payload);
+
+    const items = $cart.mountPayload(cartItems);
+    return $order.create({ ...payload, items });
   }
 
   return (
