@@ -1,17 +1,18 @@
 import axios from 'axios';
+import PubSub from 'pubsub-js';
 
 import { api as ApiConfig } from '../config';
-import { setLoader } from '../contexts';
+import { loaderContextTopic } from '../contexts/loader.context';
 
 const $http = axios.create(ApiConfig);
 
 $http.interceptors.request.use((config) => {
-  setLoader({ visible: true });
+  PubSub.publish(loaderContextTopic, { visible: true });
   return config;
 });
 
 $http.interceptors.response.use((response) => {
-  setLoader();
+  PubSub.publish(loaderContextTopic, { visible: false });
   return response;
 });
 
