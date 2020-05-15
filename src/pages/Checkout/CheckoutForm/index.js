@@ -7,9 +7,7 @@ import { steps, maskedValues, isFormValuesValid } from './content';
 import * as S from './styled';
 
 function CheckoutForm() {
-  const {
-    cart: { items: cartItems },
-  } = useCart();
+  const { cart } = useCart();
   const [active, setActive] = useState(steps[1]);
   const [payload, setPayload] = useState({ deliveryType: '' });
 
@@ -38,7 +36,7 @@ function CheckoutForm() {
   function onSubmitHandler(e) {
     e.preventDefault();
 
-    const items = $cart.mountPayload(cartItems);
+    const items = $cart.mountPayload(cart.items);
     return $order.create({ ...payload, items });
   }
 
