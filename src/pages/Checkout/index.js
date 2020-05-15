@@ -22,7 +22,6 @@ function CheckoutPage() {
     const updatedEditing = { index, payload };
 
     setEdit(updatedEditing);
-    console.log(updatedEditing);
   }
 
   function onItemRemoveHandler(itemId) {
