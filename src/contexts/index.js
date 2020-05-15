@@ -18,5 +18,5 @@ AppContextProvider.propTypes = { children: PropTypes.node.isRequired };
 
 // ==> Context Hooks
 export { useCart } from './cart.context';
-export { useLoader, setLoader } from './loader.context';
+export { useLoader } from './loader.context';
 export { useProductsContext } from './products.context';
