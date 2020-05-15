@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 
 import * as S from './styled';
 
@@ -21,8 +21,22 @@ function PaymentCheckoutForm({ onChange, onPrev }) {
   function onPaymentTypeSelect({ target }) {
     const { value } = target;
     setPaymentType(value);
+
+    if (value === 'Dinheiro') {
+      setTimeout(() => {
+        const paymentChangeInput = document.querySelector('#paymentChange');
+        console.log(paymentChangeInput);
+        paymentChangeInput.focus();
+      }, 500);
+    }
+
     return onChange({ target });
   }
+
+  useEffect(() => {
+    const paymentMethodInput = document.querySelector('select');
+    paymentMethodInput.focus();
+  }, []);
 
   return (
     <>

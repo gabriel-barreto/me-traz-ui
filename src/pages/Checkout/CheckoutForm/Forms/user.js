@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 
 import formPropTypes from './formType';
 import * as S from './styled';
@@ -28,6 +28,11 @@ const fields = [
 ];
 
 function UserCheckoutForm({ onChange, onPrev, onNext }) {
+  useEffect(() => {
+    const toFocusInput = document.querySelector('input');
+    toFocusInput.focus();
+  }, []);
+
   return (
     <>
       <S.FormTitle>Te conheço?</S.FormTitle>
